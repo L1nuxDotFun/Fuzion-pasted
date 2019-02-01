@@ -19,16 +19,12 @@ A fully featured meme hack for *CounterStrike : Global Offensive* written in C++
 ==================
 
 __Ubuntu-Based / Debian:__
-```are you actually retarted?
+``` *are you actually retarted?*
 ```
 __Arch:__
 ```bash
 sudo pacman -S base-devel cmake gdb git sdl2 lua xdotool patchelf
 ```
-__Fedora:__
-``´ oops lost these
-```
-
 ===================
 
 #### Download Fuzion-pasted-meme-hack-4-free:
