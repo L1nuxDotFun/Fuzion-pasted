@@ -37,10 +37,6 @@ __Fedora:__
 git clone --recursive https://github.com/LWSS/Fuzion
 ```
 
-```bash
-cd Fuzion
-```
-
 ===================
 
 #### Compile manually lmao ~~with build script~~
