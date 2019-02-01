@@ -55,10 +55,8 @@ selling on my sel.... i mean wat no, this aint wendusws p2c
 ## Grenade Configs
 no
 ## Screenshots
-LEA GET SOME NEW FUCKING SCREENSHOTS LMAO
-~~![aimbot](http://i.imgur.com/NhSEO9W.png)
-![menu](http://i.imgur.com/59TGPfw.png)
-![esp](http://i.imgur.com/lnF42Ng.png)~~
+![menu](https://i.imgur.com/WjKeuHr.png)
+![esp](https://i.imgur.com/HXd17cU.jpg)
 PLS
 
 ## Credits
