@@ -35,7 +35,7 @@ git clone --recursive https://github.com/LWSS/Fuzion
 
 ===================
 
-#### Compile manually lmao ~~with build script~~
+#### Compile ~~with build script~~ manually lmao 
 
 
 # ALL KINDS OF STUFF ABOUT INJECTING LOL
@@ -70,3 +70,5 @@ Special thanks to [@aixxe](http://www.github.com/aixxe/) ([aixxe.net](http://www
 This project was also originally based upon Atex's [Linux Basehook](http://unknowncheats.me/forum/counterstrike-global-offensive/181878-linux-basehook.html).
 also maybe pasted by some random guy or something im bored
 https://l1nux.fun/ holy fuck this is a meme.
+
+``` 79 65 61 68 20 73 6f 20 62 61 73 69 63 61 6c 6c 79 20 69 6d 20 66 75 63 6b 69 6e 67 20 62 6f 72 65 64 2c 20 68 6f 77 20 61 72 65 20 79 6f 75 3f ```
