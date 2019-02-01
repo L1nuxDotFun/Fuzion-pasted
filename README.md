@@ -41,18 +41,8 @@ git clone --recursive https://github.com/LWSS/Fuzion
 
 #### Compile manually lmao ~~with build script~~
 
-~~You can build easily with the included build script.~~
-```bash
-there was some code here sorry forgot
-```
 
-~~You can later update with ~~
-```bash
-./update
-```
-
-
-ALL KINDS OF STUFF ABOUT INJECTING LOL
+# ALL KINDS OF STUFF ABOUT INJECTING LOL
 
 
 ## Using the hack
