@@ -217,6 +217,70 @@ public:
 
 		UpdateVisibility(this);
 	}
+
+    void SetAbsOrigin(Vector origin) // up-to-date 25/01/2019
+    {
+        typedef void (*SetAbsOriginFn) (void*, const Vector&);
+        static SetAbsOriginFn SetAbsOrigin;
+
+        if (!SetAbsOrigin)
+        {
+            uintptr_t func_address = PatternFinder::FindPatternInModule((XORSTR("client_panorama_client.so")), // SetAbsOrigin xref: "ClientProjectile: No model %d!" - the 3rd sub after the 6 dwords
+                                                                        (unsigned char*) XORSTR("\x55\x48\x89\xE5\x41\x55\x41\x54\x49\x89\xF4\x53\x48\x89\xFB\x48\x83\xEC\x08\xE8\x00\x00\x00\x00\xF3"),
+                                                                        XORSTR("xxxxxxxxxxxxxxxxxxxx????x"));
+
+            SetAbsOrigin = reinterpret_cast<SetAbsOriginFn>(func_address);
+        }
+        SetAbsOrigin(this, origin);
+    }
+
+    void SetAbsAngles(QAngle angles) // up-to-date 25/01/2019
+    {
+        typedef void (*SetAbsAnglesFn) (void*, const QAngle&);
+        static SetAbsAnglesFn SetAbsAngles;
+
+        if (!SetAbsAngles)
+        {
+            uintptr_t func_address = PatternFinder::FindPatternInModule((XORSTR("client_panorama_client.so")), // SetAbsAngles xref: "ClientProjectile: No model %d!" - the 2nd sub after the 6 dwords
+                                                                        (unsigned char*) XORSTR("\x55\x48\x89\xE5\x41\x57\x41\x56\x41\x55\x41\x54\x49\x89\xF4\x53\x48\x89\xFB\x48\x83\xEC\x68\xE8\x00\x00\x00\x00\xF3"),
+                                                                        XORSTR("xxxxxxxxxxxxxxxxxxxxxxxx????x"));
+
+            SetAbsAngles = reinterpret_cast<SetAbsAnglesFn>(func_address);
+        }
+
+        SetAbsAngles(this, angles);
+    }
+
+	const Vector& GetAbsOrigin()
+	{
+		typedef Vector&(* oGetAbsOrigin)(void*);
+		return getvfunc<oGetAbsOrigin>(this, 12)(this);
+	}
+
+	const QAngle& GetAbsAngles()
+	{
+		typedef QAngle&(* oGetAbsAngles)(void*);
+		return getvfunc<oGetAbsAngles>(this, 13)(this);
+	}
+
+	void InvalidateBoneCache() // up-to-date 25/01/2019 -- get offsets from "80 3D ? ? ? ? ? 55 48 89 E5 74 1C"
+	{
+		static uintptr_t boneCounterAddr = 0;
+
+		if (!boneCounterAddr)
+		{
+			boneCounterAddr = PatternFinder::FindPatternInModule((XORSTR("client_panorama_client.so")),
+																 (unsigned char*) XORSTR("\x80\x3D\x00\x00\x00\x00\x00\x55\x48\x89\xE5\x74\x1C"), // the bool check in InvalidateBoneCache
+																 XORSTR("xx?????xxxxxx"));
+
+			boneCounterAddr = GetAbsoluteAddress(boneCounterAddr + 14, 2, 7);
+		}
+
+		unsigned long g_iModelBoneCounter = *(unsigned long*)(boneCounterAddr);
+
+		*(unsigned long*)((uintptr_t)this + 0x2C58) = g_iModelBoneCounter - 1;
+		*(unsigned long*)((uintptr_t)this + 0x2F90) = 0xFF7FFFFF;
+	}
 };
 
 /* generic game classes */
