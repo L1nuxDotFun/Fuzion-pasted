@@ -31,9 +31,6 @@ void Resolver::FrameStageNotify(ClientFrameStage_t stage)
 
 			float maxDelta = AntiAim::GetMaxDelta(animState);
 
-			IEngineClient::player_info_t entityInformation;
-			engine->GetPlayerInfo(i, &entityInformation);
-
 			int missedShot = LogShots::missedShots[player->GetIndex() - 1];
 
 			switch (missedShot % 5)

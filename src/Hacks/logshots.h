@@ -26,7 +26,6 @@ struct Shots
         hit = false;
         networked = false;
         processed = true;
-        impacts.reserve(4); //unnecessary but fuck you why not
     }
 
     Shots(C_BasePlayer* enti, Vector srci, float timei)
@@ -37,7 +36,6 @@ struct Shots
         hit = false;
         networked = false;
         processed = false;
-        impacts.reserve(4); //unnecessary but fuck you why not
     }
 
     C_BasePlayer* ent;
@@ -56,5 +54,5 @@ namespace LogShots
     extern std::deque<Shots> shots;
     extern std::deque<LoggedEvent> eventList;
 
-    extern std::array<int, 64> missedShots;
+    extern std::array<int, 65> missedShots;
 };

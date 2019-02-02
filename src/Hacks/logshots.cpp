@@ -5,7 +5,7 @@ bool Settings::LogShots::enabled = false;
 std::deque<Shots> LogShots::shots;
 std::deque<LoggedEvent> LogShots::eventList;
 
-std::array<int, 64> LogShots::missedShots;
+std::array<int, 65> LogShots::missedShots;
 
 std::string HitgroupToString(int hitgroup)
 {
@@ -77,6 +77,9 @@ void LogShots::FireGameEvent(IGameEvent *event)
     if (!localplayer)
         return;
 
+    if (!Settings::LogShots::enabled)
+        return;
+
     if (!strcmp(event->GetName(), XORSTR("player_hurt")))
     {
         int attacker = engine->GetPlayerForUserID(event->GetInt(XORSTR("attacker")));
@@ -132,6 +135,12 @@ void LogShots::CreateMove(CUserCmd* cmd)
     if (!localplayer)
         return;
 
+    if (Aimbot::aimbotTarget == -1)
+        return;
+
+    if (!Settings::LogShots::enabled)
+        return;
+
     if (shots.empty()) return;
     auto shot = shots.front();
     if (shot.processed || shot.hit || abs(shot.time - globalVars->curtime) > 1.f)
@@ -156,9 +165,6 @@ void LogShots::CreateMove(CUserCmd* cmd)
 
     if (!Settings::Resolver::resolveAll)
     {
-        shot.processed = true;
-        shots.erase(shots.begin());
-
         return;
     }
 
@@ -196,7 +202,7 @@ void LogShots::CreateMove(CUserCmd* cmd)
         cvar->ConsoleColorPrintf(ColorRGBA(39, 106, 219, 255), XORSTR("[Fuzion] "));
         cvar->ConsoleDPrintf(str.c_str());
 
-        missedShots[shot.ent->GetIndex() - 1]++;
+        missedShots[Aimbot::aimbotTarget - 1]++;
     } else { // spread
         eventList.push_back({"Missed shot due to spread", globalVars->curtime + 5.f});
         cvar->ConsoleColorPrintf(ColorRGBA(39, 106, 219, 255), XORSTR("[Fuzion] "));

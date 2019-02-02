@@ -57,6 +57,7 @@ bool Settings::ESP::Info::clan = false;
 bool Settings::ESP::Info::steamId = false;
 bool Settings::ESP::Info::rank = false;
 bool Settings::ESP::Info::health = false;
+bool Settings::ESP::Info::missedShots = false;
 bool Settings::ESP::Info::weapon = false;
 bool Settings::ESP::Info::scoped = false;
 bool Settings::ESP::Info::reloading = false;
@@ -887,6 +888,12 @@ static void DrawPlayer(int index, C_BasePlayer* player, IEngineClient::player_in
 	{
 		std::string buf = std::to_string(player->GetHealth()) + XORSTR(" HP");
 		Draw::Text(x + w + boxSpacing, (int)(y + h - textSize.y), buf.c_str(), esp_font, Color(255, 255, 255));
+	}
+
+	if (Settings::ESP::Info::missedShots)
+	{
+		std::string buf = XORSTR("Missed : ") + std::to_string(LogShots::missedShots[player->GetIndex() - 1]);
+		Draw::Text(x + w + boxSpacing, (int)(y + h - textSize.y * (Settings::ESP::Info::health ? 2 : 1)), buf.c_str(), esp_font, Color(255, 255, 255));
 	}
 
 	// weapon

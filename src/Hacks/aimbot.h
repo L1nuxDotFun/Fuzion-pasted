@@ -14,6 +14,7 @@ namespace Aimbot
 {
 	extern bool aimStepInProgress;
 	extern std::vector<int64_t> friends;
+	extern int aimbotTarget;
 
 	void XDOCleanup();
 

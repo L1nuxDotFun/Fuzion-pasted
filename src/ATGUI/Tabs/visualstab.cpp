@@ -146,6 +146,7 @@ void Visuals::RenderTab()
 				ImGui::Checkbox(XORSTR("Planting"), &Settings::ESP::Info::planting);
 				ImGui::Checkbox(XORSTR("Defusing"), &Settings::ESP::Info::defusing);
 				ImGui::Checkbox(XORSTR("Rescuing Hostage"), &Settings::ESP::Info::rescuing);
+                ImGui::Checkbox(XORSTR("Missed Shots"), &Settings::ESP::Info::missedShots);
 			}
 
 			ImGui::Columns(1);
