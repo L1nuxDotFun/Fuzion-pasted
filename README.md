@@ -13,8 +13,11 @@ A fully featured meme hack for *CounterStrike : Global Offensive* written in C++
 ## WATS DIFFERENT FROM ORIGINAL FUZION
 
 Slower build time
+
 Not-working-as-expected hitchance, event log, nade prediction
+
 Gay bruteforce resolver
+
 Thirdperson fix
 
 ## Compiling
