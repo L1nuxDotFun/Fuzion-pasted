@@ -54,7 +54,6 @@ bool Settings::Aimbot::Prediction::enabled = false;
 bool Settings::Aimbot::moveMouse = false;
 
 bool Aimbot::aimStepInProgress = false;
-int Aimbot::aimbotTarget = -1;
 std::vector<int64_t> Aimbot::friends = { };
 std::vector<long> killTimes = { 0 }; // the Epoch time from when we kill someone
 
@@ -386,7 +385,6 @@ static C_BasePlayer* GetClosestPlayerAndSpot(CUserCmd* cmd, bool visibleCheck, V
 				continue;
 		}
 
-		Aimbot::aimbotTarget = i;
 		Vector eVecTarget = player->GetBonePosition((int) Settings::Aimbot::bone);
 		if( Settings::Aimbot::AutoAim::closestBone )
 		{
@@ -868,7 +866,7 @@ void Aimbot::CreateMove(CUserCmd* cmd)
     if (!Settings::Aimbot::silent)
         engine->SetViewAngles(cmd->viewangles);
 
-    if (cmd->buttons & IN_ATTACK && Settings::LogShots::enabled)
+    if (cmd->buttons & IN_ATTACK && Settings::LogShots::enabled && player)
         LogShots::shots.push_back(Shots(player, localplayer->GetEyePosition(), globalVars->curtime));
 }
 void Aimbot::FireGameEvent(IGameEvent* event)

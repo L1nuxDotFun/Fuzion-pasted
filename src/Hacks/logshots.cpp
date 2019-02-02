@@ -135,9 +135,6 @@ void LogShots::CreateMove(CUserCmd* cmd)
     if (!localplayer)
         return;
 
-    if (Aimbot::aimbotTarget == -1)
-        return;
-
     if (!Settings::LogShots::enabled)
         return;
 
@@ -202,7 +199,7 @@ void LogShots::CreateMove(CUserCmd* cmd)
         cvar->ConsoleColorPrintf(ColorRGBA(39, 106, 219, 255), XORSTR("[Fuzion] "));
         cvar->ConsoleDPrintf(str.c_str());
 
-        missedShots[Aimbot::aimbotTarget - 1]++;
+        missedShots[shot.ent->GetIndex() - 1]++;
     } else { // spread
         eventList.push_back({"Missed shot due to spread", globalVars->curtime + 5.f});
         cvar->ConsoleColorPrintf(ColorRGBA(39, 106, 219, 255), XORSTR("[Fuzion] "));
