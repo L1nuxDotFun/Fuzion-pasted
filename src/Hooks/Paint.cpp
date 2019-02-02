@@ -14,7 +14,6 @@ void Hooks::Paint(void* thisptr, PaintMode_t mode)
 	{
 		StartDrawing(surface);
 
-		AntiAim::Paint();
 		Dlights::Paint();
 		ESP::Paint();
 		Recoilcrosshair::Paint();

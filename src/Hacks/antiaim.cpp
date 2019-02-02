@@ -432,16 +432,3 @@ void AntiAim::CreateMove(CUserCmd* cmd)
 
 	Math::CorrectMovement(oldAngle, cmd, oldForward, oldSideMove);
 }
-
-void AntiAim::Paint()
-{
-	C_BasePlayer* localplayer = (C_BasePlayer*) entityList->GetClientEntity(engine->GetLocalPlayer());
-	if (!localplayer)
-		return;
-
-	CCSGOAnimState* animState = localplayer->GetAnimState();
-	if (!animState)
-		return;
-
-	Draw::Text( 4, 4, std::to_string(AntiAim::GetMaxDelta(animState)).c_str(), esp_font, Color(255, 255, 255, 255));
-}

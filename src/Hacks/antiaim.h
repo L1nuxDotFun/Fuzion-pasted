@@ -10,7 +10,6 @@ namespace AntiAim
 {
 	//Hooks
 	void CreateMove(CUserCmd* cmd);
-	void Paint();
 
 	float GetMaxDelta( CCSGOAnimState *animState );
 	extern QAngle real;
