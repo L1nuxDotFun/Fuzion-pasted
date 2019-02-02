@@ -161,15 +161,6 @@ void PlayerList::RenderWindow()
 					else
 						Aimbot::friends.erase(std::find(Aimbot::friends.begin(), Aimbot::friends.end(), entityInformation.xuid));
 				}
-
-				bool shouldResolve = std::find(Resolver::Players.begin(), Resolver::Players.end(), entityInformation.xuid) != Resolver::Players.end();
-				if (ImGui::Checkbox(XORSTR("Resolver"), &shouldResolve))
-				{
-					if (shouldResolve)
-						Resolver::Players.push_back(entityInformation.xuid);
-					else
-						Resolver::Players.erase(std::find(Resolver::Players.begin(), Resolver::Players.end(), entityInformation.xuid));
-				}
 			}
 			ImGui::NextColumn();
 			{

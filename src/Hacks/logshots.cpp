@@ -1,5 +1,7 @@
 #include "logshots.h"
 
+bool Settings::LogShots::enabled = false;
+
 std::deque<Shots> LogShots::shots;
 std::deque<LoggedEvent> LogShots::eventList;
 
@@ -37,6 +39,9 @@ void LogShots::Paint()
     static HFont logFont = Draw::CreateFont(XORSTR("Andale Mono"), 10, (int)FontFlags::FONTFLAG_DROPSHADOW );
 
     if (!engine->IsInGame())
+        return;
+
+    if (!Settings::LogShots::enabled)
         return;
 
     for (auto ev : LogShots::eventList)
@@ -97,6 +102,8 @@ void LogShots::FireGameEvent(IGameEvent *event)
         cvar->ConsoleDPrintf(str.c_str());
         eventList.push_back(LoggedEvent(str, globalVars->curtime + 5.f));
 
+        missedShots[victim - 1] = 0;
+
         if (!shots.empty())
         {
             shots.front().hit = true;
@@ -147,6 +154,14 @@ void LogShots::CreateMove(CUserCmd* cmd)
         shot.impacts.erase(shot.impacts.begin());
     }
 
+    if (!Settings::Resolver::resolveAll)
+    {
+        shot.processed = true;
+        shots.erase(shots.begin());
+
+        return;
+    }
+
     Ray_t ray;
     trace_t tr;
     CTraceFilterEntitiesOnly filter;
@@ -176,9 +191,12 @@ void LogShots::CreateMove(CUserCmd* cmd)
                 str = XORSTR("Missed shot due to [insert excuses here]\n");
                 break;
         }
+
         eventList.push_back({str, globalVars->curtime + 5.f});
         cvar->ConsoleColorPrintf(ColorRGBA(39, 106, 219, 255), XORSTR("[Fuzion] "));
         cvar->ConsoleDPrintf(str.c_str());
+
+        missedShots[shot.ent->GetIndex() - 1]++;
     } else { // spread
         eventList.push_back({"Missed shot due to spread", globalVars->curtime + 5.f});
         cvar->ConsoleColorPrintf(ColorRGBA(39, 106, 219, 255), XORSTR("[Fuzion] "));

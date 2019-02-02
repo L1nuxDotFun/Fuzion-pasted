@@ -208,6 +208,7 @@ void Visuals::RenderTab()
 				ImGui::Checkbox(XORSTR("No Sky"), &Settings::NoSky::enabled);
 				ImGui::Checkbox(XORSTR("No Smoke"), &Settings::NoSmoke::enabled);
 				ImGui::Checkbox(XORSTR("Grenade Prediction"), &Settings::ESP::GrenadePrediction::enabled);
+				ImGui::Checkbox(XORSTR("Log Shots"), &Settings::LogShots::enabled);
 
 				if(ImGui::Button(XORSTR("Tracer Effect"), ImVec2(-1, 0)))
 					ImGui::OpenPopup(XORSTR("##TracerEffectWindow"));

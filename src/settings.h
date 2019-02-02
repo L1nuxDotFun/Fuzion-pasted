@@ -1018,6 +1018,7 @@ namespace Settings
 		extern int frequency;
 
 	}
+
 	namespace AutoKnife
  	{
  		extern bool enabled;
@@ -1029,6 +1030,12 @@ namespace Settings
  			extern bool allies;
  		}
  	}
+
+ 	namespace LogShots
+	{
+		extern bool enabled;
+	}
+
     namespace Debug
     {
         namespace AutoWall
