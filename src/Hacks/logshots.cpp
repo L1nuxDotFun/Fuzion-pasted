@@ -179,7 +179,7 @@ void LogShots::CreateMove(CUserCmd* cmd)
         switch ( (int) (globalVars->curtime * 100) % 5 )
         {
             case 0:
-                str = XORSTR("Missed shot due to config\n");
+                str = XORSTR("Missed shot due to bad config\n");
                 break;
             case 1:
                 str = XORSTR("Missed shot due to the cheat refusing to look at gay people\n");
