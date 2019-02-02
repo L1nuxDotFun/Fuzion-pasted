@@ -72,6 +72,12 @@ public:
 		return getvfunc<oIsInGame>(this, 26)(this);
 	}
 
+	INetChannelInfo* GetNetChannelInfo()
+	{
+		typedef INetChannelInfo* (* oGetNetChannelInfo) (void*);
+		return getvfunc<oGetNetChannelInfo>(this, 78)(this);
+	}
+
 	bool IsTakingScreenshot()
 	{
 		typedef bool (* oIsTakingScreenshot)(void*);

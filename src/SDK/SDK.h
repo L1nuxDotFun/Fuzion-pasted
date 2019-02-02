@@ -17,6 +17,7 @@
 #include "IInputSystem.h"
 #include "IMaterial.h"
 #include "IMaterialSystem.h"
+#include "INetChannelInfo.h"
 #include "IVModelRender.h"
 #include "IClientEntity.h"
 #include "ISurface.h"
