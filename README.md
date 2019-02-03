@@ -28,7 +28,8 @@ Thirdperson fix
 ==================
 
 __Ubuntu-Based / Debian:__
-``` *are you actually retarted?*
+```base
+Who uses gaybuntu in 2k19
 ```
 __Arch:__
 ```bash
