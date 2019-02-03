@@ -54,5 +54,5 @@ namespace LogShots
     extern std::deque<Shots> shots;
     extern std::deque<LoggedEvent> eventList;
 
-    extern std::array<int, 65> missedShots;
+    extern std::array<int, 64> missedShots;
 };

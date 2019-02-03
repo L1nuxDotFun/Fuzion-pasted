@@ -36,7 +36,6 @@ bool Hooks::CreateMove(void* thisptr, float flInputSampleTime, CUserCmd* cmd)
 			FakeLag::CreateMove(cmd);
 			ESP::CreateMove(cmd);
 			LogShots::CreateMove(cmd);
-			TracerEffect::CreateMove(cmd);
 		}
 		PredictionSystem::EndPrediction();
 

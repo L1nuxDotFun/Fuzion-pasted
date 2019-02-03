@@ -5,7 +5,7 @@ bool Settings::LogShots::enabled = false;
 std::deque<Shots> LogShots::shots;
 std::deque<LoggedEvent> LogShots::eventList;
 
-std::array<int, 65> LogShots::missedShots;
+std::array<int, 64> LogShots::missedShots;
 
 std::string HitgroupToString(int hitgroup)
 {

@@ -141,7 +141,6 @@ void __attribute__((destructor)) Shutdown()
 
 	Aimbot::XDOCleanup();
 	NoSmoke::Cleanup();
-	TracerEffect::RestoreTracers();
 
     for( VMT* vmt : createdVMTs ){
         delete vmt;

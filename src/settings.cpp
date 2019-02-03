@@ -331,12 +331,6 @@ void Settings::LoadDefaultsOrSave(std::string path)
 	settings[XORSTR("Dlights")][XORSTR("enabled")] = Settings::Dlights::enabled;
 	settings[XORSTR("Dlights")][XORSTR("radius")] = Settings::Dlights::radius;
 
-	settings[XORSTR("TracerEffects")][XORSTR("enabled")] = Settings::TracerEffects::enabled;
-	settings[XORSTR("TracerEffects")][XORSTR("serverSide")] = Settings::TracerEffects::serverSide;
-	settings[XORSTR("TracerEffects")][XORSTR("effect")] = (int) Settings::TracerEffects::effect;
-	settings[XORSTR("TracerEffects")][XORSTR("frequency")] = Settings::TracerEffects::frequency;
-
-
 	settings[XORSTR("Spammer")][XORSTR("spammer_type")] = (int) Settings::Spammer::type;
 	settings[XORSTR("Spammer")][XORSTR("say_team")] = Settings::Spammer::say_team;
 
@@ -540,7 +534,6 @@ void Settings::LoadDefaultsOrSave(std::string path)
 
 void Settings::LoadConfig(std::string path)
 {
-	TracerEffect::RestoreTracers();
 	if (!std::ifstream(path).good())
 	{
 		Settings::LoadDefaultsOrSave(path);
@@ -770,11 +763,6 @@ void Settings::LoadConfig(std::string path)
 
 	GetVal(settings[XORSTR("ESP")][XORSTR("GrenadePrediction")][XORSTR("enabled")], &Settings::ESP::GrenadePrediction::enabled);
 	GetVal(settings[XORSTR("ESP")][XORSTR("GrenadePrediction")][XORSTR("color")], &Settings::ESP::GrenadePrediction::color);
-
-	GetVal(settings[XORSTR("TracerEffects")][XORSTR("enabled")], &Settings::TracerEffects::enabled);
-	GetVal(settings[XORSTR("TracerEffects")][XORSTR("serverSide")], &Settings::TracerEffects::serverSide);
-	GetVal(settings[XORSTR("TracerEffects")][XORSTR("effect")], (int*)&Settings::TracerEffects::effect);
-	GetVal(settings[XORSTR("TracerEffects")][XORSTR("frequency")], &Settings::TracerEffects::frequency);
 
 	GetVal(settings[XORSTR("Dlights")][XORSTR("enabled")], &Settings::Dlights::enabled);
 	GetVal(settings[XORSTR("Dlights")][XORSTR("radius")], &Settings::Dlights::radius);

@@ -4,6 +4,8 @@ bool Settings::ESP::GrenadePrediction::enabled = false;
 ColorVar Settings::ESP::GrenadePrediction::color = ImColor( 26, 104, 173, 255 );
 
 std::vector<Vector> grenadePath;
+std::vector<std::pair<Vector, QAngle>> otherCollisions;
+
 int grenadeType = 0;
 int grenadeAct = 0;
 
@@ -48,6 +50,7 @@ void GrenadePrediction::OverrideView( CViewSetup* pSetup )
             grenadeType = 0;
             return;
         }
+
         grenadeType = (int)itemDefinitionIndex;
         Simulate( pSetup );
     }
@@ -74,6 +77,13 @@ void GrenadePrediction::Paint()
                 Draw::Line(Vector2D(nadeStart.x, nadeStart.y), Vector2D(nadeEnd.x, nadeEnd.y), Color::FromImColor(Settings::ESP::GrenadePrediction::color.Color()));
             prev = *it;
         }
+
+        for (auto it = otherCollisions.begin(), end = otherCollisions.end(); it != end; ++it)
+        {
+            Draw::Cube3D(2.f, it->second, it->first, Color(0, 255, 0, 200));
+        }
+
+        Draw::Cube3D(2.f, otherCollisions.rbegin()->second, otherCollisions.rbegin()->first, Color(255, 0, 0, 200));
 
         if (!debugOverlay->ScreenPosition(prev, nadeEnd))
         {
@@ -158,8 +168,9 @@ void GrenadePrediction::Simulate( CViewSetup* setup )
     int logstep = static_cast<int>(0.05f / interval);
     int logtimer = 0;
 
-
     grenadePath.clear();
+    otherCollisions.clear();
+
     for (unsigned int i = 0; i < grenadePath.max_size() - 1; ++i)
     {
         if (!logtimer)
@@ -199,6 +210,13 @@ int GrenadePrediction::Step(Vector& vecSrc, Vector& vecThrow, int tick, float in
     {
         result |= 2; // Collision!
         ResolveFlyCollisionCustom(tr, vecThrow, interval);
+    }
+
+    if ((result & 1) || vecThrow == Vector(0, 0, 0) || tr.fraction != 1.0f)
+    {
+        QAngle angles;
+        Math::VectorAngles((tr.endpos - tr.startpos).Normalize(), angles);
+        otherCollisions.push_back(std::make_pair(tr.endpos, angles));
     }
 
     // Set new position

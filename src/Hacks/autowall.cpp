@@ -138,22 +138,16 @@ static bool HandleBulletPenetration(CCSWeaponInfo* weaponInfo, int target, Autow
 
 	if (enter_material == exit_material)
 	{
-		if (exit_material == 87 || exit_material == 85)
-			combined_penetration_modifier = 3.0f;
-		else if (exit_material == 76)
-			combined_penetration_modifier = 2.0f;
+		if (exit_material == CHAR_TEX_PLASTIC)
+			combined_penetration_modifier = 2.f;
+		else if (exit_material == CHAR_TEX_CARDBOARD || exit_material == CHAR_TEX_WOOD)
+			combined_penetration_modifier = 3.f;
 	}
 
-	float v34 = fmaxf(0.f, 1.0f / combined_penetration_modifier);
-	float v35 = (data.current_damage * final_damage_modifier) + v34 * 3.0f * fmaxf(0.0f, (3.0f / weaponInfo->GetPenetration()) * 1.25f);
-	float thickness = (trace_exit.endpos - data.enter_trace.endpos).Length();
+	float thickness = data.enter_trace.endpos.DistToSqr(trace_exit.endpos);
+	float invPenMod = fmaxf(1.f / combined_penetration_modifier, 0.f);
 
-	thickness *= thickness;
-	thickness *= v34;
-	thickness /= 24.0f;
-
-	float lost_damage = fmaxf(0.0f, v35 + thickness);
-
+	float lost_damage = fmaxf((invPenMod * thickness * (1.f / 24.f)) + ((data.current_damage * final_damage_modifier) + fmaxf(3.75f / weaponInfo->GetPenetration(), 0.f) * 3.f * invPenMod), 0.f);
 	if (lost_damage > data.current_damage)
 		return false;
 
