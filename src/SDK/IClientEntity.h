@@ -452,6 +452,16 @@ public:
 		return this->GetVecOrigin() + this->GetVecViewOffset();
 	}
 
+	inline matrix3x4_t* GetBoneMatrix()
+	{
+		matrix3x4_t BoneMatrix[MAXSTUDIOBONES];
+
+		if (!this->SetupBones(BoneMatrix, MAXSTUDIOBONES, BONE_USED_BY_HITBOX, 0))
+			return nullptr;
+
+		return BoneMatrix;
+	}
+
 	inline Vector GetBonePosition(int boneIndex)
 	{
 		matrix3x4_t BoneMatrix[MAXSTUDIOBONES];
