@@ -9,6 +9,26 @@ std::vector<std::pair<Vector, QAngle>> otherCollisions;
 int grenadeType = 0;
 int grenadeAct = 0;
 
+inline float CSGO_Armor(float flDamage, int ArmorValue)
+{
+    float flArmorRatio = 0.5f;
+    float flArmorBonus = 0.5f;
+    if (ArmorValue > 0)
+    {
+        float flNew = flDamage * flArmorRatio;
+        float flArmor = (flDamage - flNew) * flArmorBonus;
+
+        if (flArmor > static_cast< float >(ArmorValue))
+        {
+            flArmor = static_cast< float >(ArmorValue) * (1.f / flArmorBonus);
+            flNew = flDamage - flArmor;
+        }
+
+        flDamage = flNew;
+    }
+    return flDamage;
+}
+
 void GrenadePrediction::CreateMove( CUserCmd* cmd )
 {
     if (!Settings::ESP::enabled && !Settings::ESP::GrenadePrediction::enabled)
@@ -80,10 +100,10 @@ void GrenadePrediction::Paint()
 
         for (auto it = otherCollisions.begin(), end = otherCollisions.end(); it != end; ++it)
         {
-            Draw::Cube3D(2.f, it->second, it->first, Color(0, 255, 0, 200));
+            Draw::Cube3D(1.f, it->second, it->first, Color(255, 255, 255, 200));
         }
 
-        Draw::Cube3D(2.f, otherCollisions.rbegin()->second, otherCollisions.rbegin()->first, Color(255, 0, 0, 200));
+        Draw::Cube3D(1.f, otherCollisions.rbegin()->second, otherCollisions.rbegin()->first, Color(255, 255, 255, 200));
 
         if (!debugOverlay->ScreenPosition(prev, nadeEnd))
         {
@@ -174,24 +194,23 @@ void GrenadePrediction::Simulate( CViewSetup* setup )
     for (unsigned int i = 0; i < grenadePath.max_size() - 1; ++i)
     {
         if (!logtimer)
+        {
+            if (!grenadePath.empty() && vecSrc.DistTo(grenadePath.back()) < std::max(0.00001f, vecThrow.Length() / 25.f)) break;	//getto fix to smoke infinite loop anti pasta, should work fine enough
             grenadePath.push_back(vecSrc);
+        }
 
         int s = Step(vecSrc, vecThrow, i, interval);
-        if ((s & 1))
-            break;
+        if ((s & 1) || vecThrow == Vector(0, 0, 0)) break;
 
         // Reset the log timer every logstep OR we bounced
-        if ((s & 2) || logtimer >= logstep)
-            logtimer = 0;
-        else
-            ++logtimer;
+        if ((s & 2) || logtimer >= logstep) logtimer = 0;
+        else ++logtimer;
     }
     grenadePath.push_back(vecSrc);
 }
 
 int GrenadePrediction::Step(Vector& vecSrc, Vector& vecThrow, int tick, float interval)
 {
-    // Apply gravity
     Vector move;
     AddGravityMove(move, vecThrow, interval, false);
 
@@ -200,13 +219,14 @@ int GrenadePrediction::Step(Vector& vecSrc, Vector& vecThrow, int tick, float in
     PushEntity(vecSrc, move, tr);
 
     int result = 0;
+    // Check ending conditions
     if (CheckDetonate(vecThrow, tr, tick, interval))
     {
         result |= 1;
     }
 
     // Resolve collisions
-    if ( tr.fraction != 1.0f )
+    if (tr.fraction != 1.0f)
     {
         result |= 2; // Collision!
         ResolveFlyCollisionCustom(tr, vecThrow, interval);
@@ -230,30 +250,31 @@ bool GrenadePrediction::CheckDetonate(const Vector& vecThrow, const trace_t& tr,
     if (grenadeType == 0)
         return false;
 
-    switch (grenadeType)
+    switch ((ItemDefinitionIndex) grenadeType)
     {
-        case 45: // WEAPON_SMOKEGRENADE = 45,
-        case 47: // WEAPON_DECOY = 47,
-        case 82: // WEAPON_DIVERSION = 82,
+        case ItemDefinitionIndex::WEAPON_SMOKEGRENADE:
+        case ItemDefinitionIndex::WEAPON_DECOY:
             // Velocity must be <0.1, this is only checked every 0.2s
-            if ( vecThrow.Length2D() < 0.1f )
+            if (vecThrow.Length()<0.1f)
             {
                 int det_tick_mod = static_cast<int>(0.2f / interval);
-                return !( tick % det_tick_mod );
+                return !(tick%det_tick_mod);
             }
             return false;
-        case 46: // WEAPON_MOLOTOV = 46,
-        case 48: // WEAPON_INCGRENADE = 48,
+
+        case ItemDefinitionIndex::WEAPON_MOLOTOV:
+        case ItemDefinitionIndex::WEAPON_INCGRENADE:
             // Detonate when hitting the floor
-            if (tr.fraction != 1.0f && tr.plane.normal.z > 0.7f)
+            if (tr.fraction != 1.0f && tr.plane.normal.z>0.7f)
                 return true;
             // OR we've been flying for too long
-        case 43: // WEAPON_FLASHBANG = 43,
-        case 44: // WEAPON_HEGRENADE = 44,
+
+        case ItemDefinitionIndex::WEAPON_FLASHBANG:
+        case ItemDefinitionIndex::WEAPON_HEGRENADE:
             // Pure timer based, detonate at 1.5s, checked every 0.2s
-            return static_cast<float>(tick) * interval > 1.5f && !( tick % static_cast<int>(0.2f / interval) );
+            return static_cast<float>(tick)*interval>1.5f && !(tick%static_cast<int>(0.2f / interval));
+
         default:
-            assert(false);
             return false;
     }
 }
@@ -282,20 +303,23 @@ void GrenadePrediction::AddGravityMove(Vector& move, Vector& vel, float frametim
     if (!Settings::ESP::enabled && !Settings::ESP::GrenadePrediction::enabled)
         return;
 
-    Vector basevel( 0.0f, 0.0f, 0.0f );
+    Vector basevel(0.f, 0.f, 0.f);
 
-    move.x = ( vel.x + basevel.x ) * frametime;
-    move.y = ( vel.y + basevel.y ) * frametime;
+    move.x = (vel.x + basevel.x) * frametime;
+    move.y = (vel.y + basevel.y) * frametime;
 
     if (onground)
     {
-        move.z = ( vel.z + basevel.z ) * frametime;
+        move.z = (vel.z + basevel.z) * frametime;
     }
     else
     {
+        // Game calls GetActualGravity( this );
         float gravity = 800.0f * 0.4f;
-        float newZ = vel.z - ( gravity * frametime );
+
+        float newZ = vel.z - (gravity * frametime);
         move.z = ((vel.z + newZ) / 2.0f + basevel.z) * frametime;
+
         vel.z = newZ;
     }
 }
@@ -317,30 +341,41 @@ void GrenadePrediction::ResolveFlyCollisionCustom( trace_t& tr, Vector& vecVeloc
     if (!Settings::ESP::enabled && !Settings::ESP::GrenadePrediction::enabled)
         return;
 
-    float flSurfaceElasticity = 1.0;
-    float flGrenadeElasticity = 0.45f;
-    float flTotalElasticity = flGrenadeElasticity * flSurfaceElasticity;
-    if (flTotalElasticity > 0.9f) flTotalElasticity = 0.9f;
-    if (flTotalElasticity < 0.0f) flTotalElasticity = 0.0f;
+    // Calculate elasticity
+    float flSurfaceElasticity = 1.0;  // Assume all surfaces have the same elasticity
+    float flGrenadeElasticity = 0.45f; // GetGrenadeElasticity()
+    float flTotalElasticity = std::clamp(flGrenadeElasticity * flSurfaceElasticity, 0.0f, 0.9f);
 
-    Vector vecAbsVelocity;
-    PhysicsClipVelocity( vecVelocity, tr.plane.normal, vecAbsVelocity, 2.0f );
-    vecAbsVelocity *= flTotalElasticity;
-
-    float flSpeedSqr = vecAbsVelocity.LengthSqr();
-    static const float flMinSpeedSqr = 20.0f * 20.0f;
-    if (flSpeedSqr < flMinSpeedSqr)
+    if (tr.m_pEntityHit)
     {
-        vecAbsVelocity.x = 0.0f;
-        vecAbsVelocity.y = 0.0f;
-        vecAbsVelocity.z = 0.0f;
+        // TODO : resolve player collision
     }
 
-    if ( tr.plane.normal.z > 0.7f )
+    // Calculate bounce
+    Vector vecAbsVelocity;
+    PhysicsClipVelocity(vecVelocity, tr.plane.normal, vecAbsVelocity, 2.0f);
+    vecAbsVelocity *= flTotalElasticity;
+
+    // Stop completely once we move too slow
+    float flSpeedSqr = vecAbsVelocity.LengthSqr();
+
+    // Stop if on ground
+    if (tr.plane.normal.z>0.7f)
     {
+        if (flSpeedSqr > 96000.f)
+        {
+            auto l = vecAbsVelocity.Normalize().Dot(tr.plane.normal);
+            if (l > 0.5f)
+                vecAbsVelocity *= 1.f - l + 0.5f;
+        }
+        static const float flMinSpeedSqr = 20.0f * 20.0f; // 30.0f * 30.0f in CSS
+        if (flSpeedSqr<flMinSpeedSqr)
+        {
+            vecAbsVelocity.Zero();
+        }
         vecVelocity = vecAbsVelocity;
         vecAbsVelocity *= ((1.0f - tr.fraction) * interval);
-        PushEntity( tr.endpos, vecAbsVelocity, tr );
+        PushEntity(tr.endpos, vecAbsVelocity, tr);
     }
     else
     {
@@ -350,29 +385,37 @@ void GrenadePrediction::ResolveFlyCollisionCustom( trace_t& tr, Vector& vecVeloc
 
 int GrenadePrediction::PhysicsClipVelocity(const Vector& in, const Vector& normal, Vector& out, float overbounce)
 {
-    static const float STOP_EPSILON = 0.1f;
+        static const float STOP_EPSILON = 0.1f;
 
-    float backoff;
-    float change;
-    float angle;
-    int i, blocked;
+        float    backoff;
+        float    change;
+        float    angle;
+        int        i, blocked;
 
-    blocked = 0;
+        blocked = 0;
 
-    angle = normal[2];
+        angle = normal[2];
 
-    if (angle > 0) blocked |= 1;
+        if (angle > 0)
+        {
+            blocked |= 1;        // floor
+        }
+        if (!angle)
+        {
+            blocked |= 2;        // step
+        }
 
-    if (!angle) blocked |= 2;
+        backoff = in.Dot(normal) * overbounce;
 
-    backoff = in.Dot( normal ) * overbounce;
+        for (i = 0; i<3; i++)
+        {
+            change = normal[i] * backoff;
+            out[i] = in[i] - change;
+            if (out[i] > -STOP_EPSILON && out[i] < STOP_EPSILON)
+            {
+                out[i] = 0;
+            }
+        }
 
-    for (i = 0; i < 3; i++)
-    {
-        change = normal[i] * backoff;
-        out[i] = in[i] - change;
-        if (out[i] > -STOP_EPSILON && out[i] < STOP_EPSILON) out[i] = 0;
+        return blocked;
     }
-
-    return blocked;
-}

@@ -41,8 +41,8 @@ void Math::AngleVectors(const QAngle &angles, Vector& forward, Vector& right, Ve
 	right.x = (-1 * sr * sp * cy + -1 * cr * -sy);
 	right.y = (-1 * sr * sp * sy + -1 * cr *  cy);
 	right.z = (-1 * sr * cp);
-	up.x = (cr * sp * cy + -sr*-sy);
-	up.y = (cr * sp * sy + -sr*cy);
+	up.x = (cr * sp * cy + -sr * -sy);
+	up.y = (cr * sp * sy + -sr * cy);
 	up.z = (cr * cp);
 }
 

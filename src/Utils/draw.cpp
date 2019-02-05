@@ -87,7 +87,7 @@ void Draw::Cube3D(float scalar, QAngle angles, Vector middle_origin, Color outli
 
 	Vector points_screen[8];
 	for (int i = 0; i < 8; i++)
-		if (!debugOverlay->ScreenPosition(points[i], points_screen[i]))
+		if (debugOverlay->ScreenPosition(points[i], points_screen[i]))
 			return;
 
 	surface->DrawSetColor(outline);
