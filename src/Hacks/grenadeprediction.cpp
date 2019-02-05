@@ -9,23 +9,6 @@ std::vector<std::pair<Vector, QAngle>> otherCollisions;
 int grenadeType = 0;
 int grenadeAct = 0;
 
-inline float CSGO_Armor(float flDamage, int ArmorValue) {
-    float flArmorRatio = 0.5f;
-    float flArmorBonus = 0.5f;
-    if (ArmorValue > 0) {
-        float flNew = flDamage * flArmorRatio;
-        float flArmor = (flDamage - flNew) * flArmorBonus;
-
-        if (flArmor > static_cast< float >(ArmorValue)) {
-            flArmor = static_cast< float >(ArmorValue) * (1.f / flArmorBonus);
-            flNew = flDamage - flArmor;
-        }
-
-        flDamage = flNew;
-    }
-    return flDamage;
-}
-
 void GrenadePrediction::CreateMove(CUserCmd *cmd) {
     if (!Settings::ESP::enabled && !Settings::ESP::GrenadePrediction::enabled)
         return;
