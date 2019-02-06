@@ -12,82 +12,91 @@ bool Settings::AntiAim::AutoDisable::knifeHeld = false;
 
 static bool GetBestHeadAngle(QAngle& angle)
 {
-    C_BasePlayer* localplayer = (C_BasePlayer*) entityList->GetClientEntity(engine->GetLocalPlayer());
+	float b, r, l;
 
-    QAngle viewAngles;
-    engine->GetViewAngles(viewAngles);
+	Vector src3D, dst3D, forward, right, up, src, dst;
 
-    Vector pVecTarget = localplayer->GetEyePosition();
+	trace_t tr;
+	Ray_t ray, ray2, ray3, ray4, ray5;
+	CTraceFilter filter;
 
-    float yaw = 180.f;
+	C_BasePlayer* localplayer = (C_BasePlayer*) entityList->GetClientEntity(engine->GetLocalPlayer());
+	if (!localplayer)
+		return false;
 
-    float step = M_PI * 2.0 / 8;
+	QAngle viewAngles;
+	engine->GetViewAngles(viewAngles);
 
-    auto GetTargetEntity = [ & ] ( void )
-    {
-        float bestFov = FLT_MAX;
-        C_BasePlayer* bestTarget = NULL;
+	viewAngles.x = 0;
 
-        for( int i = 0; i < engine->GetMaxClients(); ++i )
-        {
-            C_BasePlayer* player = (C_BasePlayer*) entityList->GetClientEntity(i);
+	Math::AngleVectors(viewAngles, forward, right, up);
 
-            if (!player
-                || player == localplayer
-                || player->GetDormant()
-                || !player->GetAlive()
-                || player->GetImmune()
-                || player->GetTeam() == localplayer->GetTeam())
-                continue;
+	auto GetTargetEntity = [ & ] ( void )
+	{
+		float bestFov = FLT_MAX;
+		C_BasePlayer* bestTarget = NULL;
 
-            float fov = Math::GetFov(viewAngles, Math::CalcAngle(pVecTarget, player->GetEyePosition()));
+		for( int i = 0; i < engine->GetMaxClients(); ++i )
+		{
+			C_BasePlayer* player = (C_BasePlayer*) entityList->GetClientEntity(i);
 
-            if( fov < bestFov )
-            {
-                bestFov = fov;
-                bestTarget = player;
-            }
-        }
+			if (!player
+				|| player == localplayer
+				|| player->GetDormant()
+				|| !player->GetAlive()
+				|| player->GetImmune()
+				|| player->GetTeam() == localplayer->GetTeam())
+				continue;
 
-        return bestTarget;
-    };
+			float fov = Math::GetFov(viewAngles, Math::CalcAngle(localplayer->GetEyePosition(), player->GetEyePosition()));
 
-    auto target = GetTargetEntity();
+			if( fov < bestFov )
+			{
+				bestFov = fov;
+				bestTarget = player;
+			}
+		}
 
-    if (!target)
-        return false;
+		return bestTarget;
+	};
 
-    C_BaseCombatWeapon* activeWeapon = (C_BaseCombatWeapon*) entityList->GetClientEntityFromHandle(target->GetActiveWeapon());
-    if (!activeWeapon)
-        return false;
+	auto target = GetTargetEntity();
+	filter.pSkip = localplayer;
+	src3D = localplayer->GetEyePosition();
+	dst3D = src3D + (forward * 384);
 
-    Vector eVecTarget = target->GetEyePosition();
+	if (!target)
+		return false;
 
-    float bestDamage = 1337.f;
+	ray.Init(src3D, dst3D);
+	trace->TraceRay(ray, MASK_SHOT, &filter, &tr);
+	b = (tr.endpos - tr.startpos).Length();
 
-    cvar->ConsoleDPrintf("----------- Damage calculation start -----------\n");
+	ray2.Init(src3D + right * 35, dst3D + right * 35);
+	trace->TraceRay(ray2, MASK_SHOT, &filter, &tr);
+	r = (tr.endpos - tr.startpos).Length();
 
-    for (float a = 0; a < (M_PI * 2.0); a += step)
-    {
-        Vector location(cos(a) + pVecTarget.x, sin(a) + pVecTarget.y, pVecTarget.z);
-        Autowall::FireBulletData data;
+	ray3.Init(src3D - right * 35, dst3D - right * 35);
+	trace->TraceRay(ray3, MASK_SHOT, &filter, &tr);
+	l = (tr.endpos - tr.startpos).Length();
 
-        Autowall::GetDamageCustom(eVecTarget, location, target->GetIndex(), Settings::Aimbot::friendly, data);
+	if (b < r && b < l && l == r)
+		return true; //if left and right are equal and better than back
 
-        if (data.current_damage < bestDamage)
-        {
-            bestDamage = data.current_damage;
-            yaw = RAD2DEG(a);
-        }
+	if (b > r && b > l)
+		angle.y -= 180; //if back is the best angle
+	else if (r > l && r > b)
+		angle.y += 90; //if right is the best angle
+	else if (r > l && r == b)
+		angle.y += 135; //if right is equal to back
+	else if (l > r && l > b)
+		angle.y -= 90; //if left is the best angle
+	else if (l > r && l == b)
+		angle.y -= 135; //if left is equal to back
+	else
+		return false;
 
-        cvar->ConsoleDPrintf("Angle: %f , Damage: %f\n", RAD2DEG(a), data.current_damage);
-    }
-
-    cvar->ConsoleDPrintf("Damage calculation done, angle: %f, damage: %f\n\n", angle.y, bestDamage);
-
-    angle.y = yaw;
-
-    return true;
+	return true;
 }
 
 float AntiAim::GetMaxDelta( CCSGOAnimState *animState ) {
@@ -107,7 +116,7 @@ float AntiAim::GetMaxDelta( CCSGOAnimState *animState ) {
 
     delta = *(float*)((uintptr_t)animState + 0x3A4) * unk2;
 
-    return abs(delta - 0.5f);
+    return abs(delta);
 }
 
 
