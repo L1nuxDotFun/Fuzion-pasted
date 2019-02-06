@@ -40,12 +40,9 @@ bool Hooks::CreateMove(void* thisptr, float flInputSampleTime, CUserCmd* cmd)
 		PredictionSystem::EndPrediction();
 
 		EdgeJump::PostPredictionCreateMove(cmd);
+		CreateMove::real = cmd->viewangles;
 
-		if (CreateMove::sendPacket)
-		{
-			CreateMove::real = cmd->viewangles;
-			ClanTagChanger::CreateMove();
-		}
+		ClanTagChanger::CreateMove();
 	}
 
 	return false;
