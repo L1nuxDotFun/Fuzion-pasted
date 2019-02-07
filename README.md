@@ -62,6 +62,7 @@ who even....
 
 ## Configs
 selling on my sel.... i mean wat no, this aint wendusws p2c
+well ok, [here](https://github.com/L1nuxDotFun/space-hook-config)
 ## Grenade Configs
 no
 ## Screenshots
