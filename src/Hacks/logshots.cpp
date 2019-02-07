@@ -101,7 +101,7 @@ void LogShots::FireGameEvent(IGameEvent *event)
         std::string str;
         str += std::string(XORSTR("Hit ")) + info.name + XORSTR(" in the ") + hitgroup + XORSTR(" for ") + damage + XORSTR(" dmg (") + health + XORSTR(" health remaining.)\n");
 
-        cvar->ConsoleColorPrintf(ColorRGBA(39, 106, 219, 255), XORSTR("[Fuzion] "));
+        cvar->ConsoleColorPrintf(ColorRGBA(39, 106, 219, 255), XORSTR("[SpaceHook] "));
         cvar->ConsoleDPrintf(str.c_str());
         eventList.push_back(LoggedEvent(str, globalVars->curtime + 5.f));
 
@@ -196,13 +196,13 @@ void LogShots::CreateMove(CUserCmd* cmd)
         }
 
         eventList.push_back({str, globalVars->curtime + 5.f});
-        cvar->ConsoleColorPrintf(ColorRGBA(39, 106, 219, 255), XORSTR("[Fuzion] "));
+        cvar->ConsoleColorPrintf(ColorRGBA(39, 106, 219, 255), XORSTR("[SpaceHook] "));
         cvar->ConsoleDPrintf(str.c_str());
 
         missedShots[shot.ent->GetIndex() - 1]++;
     } else { // spread
         eventList.push_back({"Missed shot due to spread", globalVars->curtime + 5.f});
-        cvar->ConsoleColorPrintf(ColorRGBA(39, 106, 219, 255), XORSTR("[Fuzion] "));
+        cvar->ConsoleColorPrintf(ColorRGBA(39, 106, 219, 255), XORSTR("[SpaceHook] "));
         cvar->ConsoleDPrintf(XORSTR("Missed shot due to spread\n"));
     }
 

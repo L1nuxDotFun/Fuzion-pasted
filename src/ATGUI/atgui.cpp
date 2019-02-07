@@ -83,7 +83,7 @@ void SetupMainMenuBar()
 
 		if( ImGui::Button(XORSTR("Unload   "), ImVec2(ImGui::CalcTextSize(XORSTR("Unload   "), NULL, true).x, 0.0f)) )
 		{
-			Fuzion::SelfShutdown();
+			SpaceHook::SelfShutdown();
 		}
 
 		ImGui::PopStyleVar();
@@ -99,7 +99,7 @@ void UI::SwapWindow()
 	if (engine->IsInGame())
 		return;
 
-    Draw::ImText( ImVec2( 4.f, 4.f ), ImColor( 255, 255, 255, 255 ), XORSTR( "Fuzion" ), NULL, 0.0f, NULL,
+    Draw::ImText( ImVec2( 4.f, 4.f ), ImColor( 255, 255, 255, 255 ), XORSTR( "SpaceHook" ), NULL, 0.0f, NULL,
                   ImFontFlags_Shadow );
 }
 

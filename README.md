@@ -6,7 +6,7 @@
 # SOMETHING ABOUT VAC AND STUFF! 
 just join the fucking discord lmao...
 
-## What is Fuzion?
+## What is SpaceHook?
 
 A fully featured meme hack for *CounterStrike : Global Offensive* written in C++.
 
@@ -37,7 +37,7 @@ sudo pacman -S base-devel cmake gdb git sdl2 lua xdotool patchelf
 ```
 ===================
 
-#### Download Fuzion-pasted-meme-hack-4-free:
+#### Download SpaceHook-pasted-meme-hack-4-free:
 
 ```bash
 git clone --recursive https://github.com/LWSS/Fuzion

@@ -76,7 +76,7 @@ static void SetupAndCheckPanels()
     }
     /* Setup our Custom Panel */
     if( !GUI::fuzionMain ){
-        cvar->ConsoleDPrintf("Creating Fuzion panel...\n");
+        cvar->ConsoleDPrintf("Creating SpaceHook panel...\n");
         // Get rid of newlines, they mess up the javascript syntax
         std::replace(mainXML.begin(), mainXML.end(), '\n', ' ');
         snprintf(jsCode, JS_MAX, cuckProtocol, mainXML.c_str());
@@ -95,11 +95,11 @@ void GUI::ToggleUI()
 {
     SetupAndCheckPanels();
     if( !panoramaEngine->AccessUIEngine()->IsValidPanelPointer(GUI::fuzionMain) ){
-        cvar->ConsoleDPrintf("[GUI::ToggleUI] - Something is wrong with our Fuzion Panel Pointer(%p)\n", (void*)GUI::fuzionMain);
+        cvar->ConsoleDPrintf("[GUI::ToggleUI] - Something is wrong with our SpaceHook Panel Pointer(%p)\n", (void*)GUI::fuzionMain);
         return;
     }
     if( !GUI::fuzionMain->HasBeenLayedOut() ){
-        cvar->ConsoleDPrintf("[GUI::ToggleUI] - Fuzion Panel not layed out yet. Try again.\n");
+        cvar->ConsoleDPrintf("[GUI::ToggleUI] - SpaceHook Panel not layed out yet. Try again.\n");
         return;
     }
 

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-project(Fuzion)
+project(SpaceHook)
 set(CMAKE_CXX_STANDARD 17)
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
@@ -7,7 +7,7 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
         message(FATAL_ERROR "Your GCC seems outdated. Go to https://github.com/AimTuxOfficial/AimTux/wiki/Updating-your-compiler for further instructions. If you have done so and still see this message, run 'git clean -fdx' and try again")
     endif()
 else()
-    message(FATAL_ERROR "You must have GCC >= 5.2 installed in order to compile Fuzion. Go to https://github.com/AimTuxOfficial/AimTux/wiki/Updating-your-compiler for further instructions.")
+    message(FATAL_ERROR "You must have GCC >= 5.2 installed in order to compile SpaceHook. Go to https://github.com/AimTuxOfficial/AimTux/wiki/Updating-your-compiler for further instructions.")
 endif()
 
 FUNCTION (EXCLUDE_FILES_FROM_DIR_IN_LIST _InFileList _excludeDirName _verbose)
@@ -44,5 +44,5 @@ EXCLUDE_FILES_FROM_DIR_IN_LIST("${SOURCE_FILES}" "${CMAKE_SOURCE_DIR}/src/ImGUI/
 
 include_directories(${INCLUDE_DIRS})
 
-add_library(Fuzion SHARED ${SOURCE_FILES})
-target_link_libraries(Fuzion SDL2 GL dl xdo)
+add_library(SpaceHook SHARED ${SOURCE_FILES})
+target_link_libraries(SpaceHook SDL2 GL dl xdo)

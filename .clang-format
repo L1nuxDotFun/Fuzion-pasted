@@ -1,4 +1,4 @@
-#Fuzion clang-format
+#SpaceHook clang-format
 BasedOnStyle: WebKit
 BreakBeforeBraces: Allman
 AllowShortIfStatementsOnASingleLine: false

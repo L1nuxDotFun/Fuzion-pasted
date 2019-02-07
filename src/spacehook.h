@@ -8,7 +8,7 @@
 #include "interfaces.h"
 #include "Utils/util.h"
 
-namespace Fuzion
+namespace SpaceHook
 {
 	void SelfShutdown();
 	extern char buildID[NAME_MAX];

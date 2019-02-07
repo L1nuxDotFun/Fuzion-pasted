@@ -1,4 +1,4 @@
-#include "Fuzion.h"
+#include "spacehook.h"
 #include "EventListener.h"
 #include "Utils/netvarmanager.h"
 
@@ -7,7 +7,7 @@ static EventListener* eventListener = nullptr;
 const char *Util::logFileName = "/tmp/fuzion.log";
 std::vector<VMT*> createdVMTs;
 
-char Fuzion::buildID[NAME_MAX] = {
+char SpaceHook::buildID[NAME_MAX] = {
 #include "../build_id_hex" // Made by ./build script.
 };
 
@@ -118,7 +118,7 @@ void MainThread()
 
 	srand(time(NULL)); // Seed random # Generator so we can call rand() later
 
-    cvar->ConsoleColorPrintf(ColorRGBA(0, 225, 0), XORSTR("\nFuzion Successfully loaded.\n"));
+    cvar->ConsoleColorPrintf(ColorRGBA(0, 225, 0), XORSTR("\nSpaceHook Successfully loaded.\n"));
 }
 /* Entrypoint to the Library. Called when loading */
 int __attribute__((constructor)) Startup()
@@ -154,9 +154,9 @@ void __attribute__((destructor)) Shutdown()
 
 	*s_bOverridePostProcessingDisable = false;
 
-	cvar->ConsoleColorPrintf(ColorRGBA(255, 0, 0), XORSTR("Fuzion Unloaded successfully.\n"));
+	cvar->ConsoleColorPrintf(ColorRGBA(255, 0, 0), XORSTR("SpaceHook Unloaded successfully.\n"));
 }
-void Fuzion::SelfShutdown()
+void SpaceHook::SelfShutdown()
 {
     // Beta Feature.
 	// Does not Correctly/Fully Unload yet.
