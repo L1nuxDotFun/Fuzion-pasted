@@ -23,5 +23,5 @@ namespace Aimbot
 	void FireGameEvent(IGameEvent* event);
 	void UpdateValues();
 
-
+	extern int targetAimbot;
 }

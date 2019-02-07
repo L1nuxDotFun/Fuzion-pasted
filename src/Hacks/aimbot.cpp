@@ -63,6 +63,7 @@ QAngle AimStepLastAngle;
 QAngle RCSLastPunch;
 
 const int headVectors = 5;
+int Aimbot::targetAimbot = -1;
 
 static xdo_t *xdo = xdo_new(NULL);
 
@@ -184,7 +185,7 @@ static float AutoWallBestSpot(C_BasePlayer *player, Vector &bestSpot)
 			for( int j = 0; j < headVectors; j++ )
 			{
 				Autowall::FireBulletData data;
-				float spotDamage = Autowall::GetDamage(headPoints[j], !Settings::Aimbot::friendly, player, data);
+				float spotDamage = Autowall::GetDamage(headPoints[j], !Settings::Aimbot::friendly, data, player->GetIndex());
 				if( spotDamage > bestDamage )
 				{
 					bestSpot = headPoints[j];
@@ -201,7 +202,7 @@ static float AutoWallBestSpot(C_BasePlayer *player, Vector &bestSpot)
 		Vector bone3D = player->GetBonePosition(boneID);
 
 		Autowall::FireBulletData data;
-		float boneDamage = Autowall::GetDamage(bone3D, !Settings::Aimbot::friendly, player, data);
+		float boneDamage = Autowall::GetDamage(bone3D, !Settings::Aimbot::friendly, data, player->GetIndex());
 		if( boneDamage > bestDamage )
 		{
 			bestSpot = bone3D;
@@ -312,9 +313,9 @@ static C_BasePlayer* GetClosestPlayerAndSpot(CUserCmd* cmd, bool visibleCheck, V
 	if (Settings::Aimbot::AutoAim::realDistance)
 		aimTargetType = AimTargetType::REAL_DISTANCE;
 
-	static C_BasePlayer* lockedOn = NULL;
+	static C_BasePlayer* lockedOn = nullptr;
 	C_BasePlayer* localplayer = (C_BasePlayer*) entityList->GetClientEntity(engine->GetLocalPlayer());
-	C_BasePlayer* closestEntity = NULL;
+	C_BasePlayer* closestEntity = nullptr;
 
 	float bestFov = Settings::Aimbot::AutoAim::fov;
 	float bestRealDistance = Settings::Aimbot::AutoAim::fov * 5.f;
@@ -323,12 +324,12 @@ static C_BasePlayer* GetClosestPlayerAndSpot(CUserCmd* cmd, bool visibleCheck, V
 	{
 		if( lockedOn->GetAlive() && !Settings::Aimbot::AutoAim::closestBone && !Entity::IsSpotVisibleThroughEnemies(lockedOn, lockedOn->GetBonePosition((int)Settings::Aimbot::bone)) )
 		{
-			lockedOn = NULL;
-			return NULL;
+			lockedOn = nullptr;
+			return nullptr;
 		}
 		if (!(cmd->buttons & IN_ATTACK || inputSystem->IsButtonDown(Settings::Aimbot::aimkey)) || lockedOn->GetDormant())//|| !Entity::IsVisible(lockedOn, bestBone, 180.f, Settings::ESP::Filters::smokeCheck))
 		{
-			lockedOn = NULL;
+			lockedOn = nullptr;
 		}
 		else
 		{
@@ -338,10 +339,10 @@ static C_BasePlayer* GetClosestPlayerAndSpot(CUserCmd* cmd, bool visibleCheck, V
 				{
 					if(Util::GetEpochTime() - killTimes.back() > Settings::Aimbot::AutoAim::engageLockTTR) // if we got the kill over the TTR time, engage another foe.
 					{
-						lockedOn = NULL;
+						lockedOn = nullptr;
 					}
 				}
-				return NULL;
+				return nullptr;
 			}
 
 			if( Settings::Aimbot::AutoAim::closestBone )
@@ -349,7 +350,7 @@ static C_BasePlayer* GetClosestPlayerAndSpot(CUserCmd* cmd, bool visibleCheck, V
 				Vector tempSpot = GetClosestSpot(cmd, localplayer, lockedOn, aimTargetType);
 				if( tempSpot.IsZero() )
 				{
-					return NULL;
+					return nullptr;
 				}
 				*bestSpot = tempSpot;
 			}
@@ -384,6 +385,8 @@ static C_BasePlayer* GetClosestPlayerAndSpot(CUserCmd* cmd, bool visibleCheck, V
 			if (std::find(Aimbot::friends.begin(), Aimbot::friends.end(), entityInformation.xuid) != Aimbot::friends.end())
 				continue;
 		}
+
+        Aimbot::targetAimbot = i;
 
 		Vector eVecTarget = player->GetBonePosition((int) Settings::Aimbot::bone);
 		if( Settings::Aimbot::AutoAim::closestBone )
@@ -449,12 +452,12 @@ static C_BasePlayer* GetClosestPlayerAndSpot(CUserCmd* cmd, bool visibleCheck, V
 			}
 			else
 			{
-				return NULL;
+				return nullptr;
 			}
 		}
 	}
 	if( bestSpot->IsZero() )
-		return NULL;
+		return nullptr;
 
 	/*
 	if( closestEntity )
@@ -484,7 +487,7 @@ static void RCS(QAngle& angle, C_BasePlayer* player, CUserCmd* cmd)
 	C_BasePlayer* localplayer = (C_BasePlayer*) entityList->GetClientEntity(engine->GetLocalPlayer());
 	QAngle CurrentPunch = *localplayer->GetAimPunchAngle();
 
-	if (Settings::Aimbot::silent || hasTarget)
+	if ( Settings::Aimbot::silent || hasTarget )
 	{
 		angle.x -= CurrentPunch.x * Settings::Aimbot::RCS::valueX;
 		angle.y -= CurrentPunch.y * Settings::Aimbot::RCS::valueY;
@@ -526,7 +529,7 @@ static void AimStep(C_BasePlayer* player, QAngle& angle, CUserCmd* cmd)
 	if (!Aimbot::aimStepInProgress)
 		return;
 
-    cmd->buttons &= ~(IN_ATTACK); // aimstep in progress, don't shoot.
+	cmd->buttons &= ~(IN_ATTACK); // aimstep in progress, don't shoot.
 
 	QAngle deltaAngle = AimStepLastAngle - angle;
 
@@ -558,13 +561,8 @@ static void Smooth(C_BasePlayer* player, QAngle& angle)
 {
 	if (!Settings::Aimbot::Smooth::enabled)
 		return;
-
-	if (Settings::AntiAim::Pitch::enabled || Settings::AntiAim::Yaw::enabled)
-		return;
-
 	if (!shouldAim || !player)
 		return;
-
 	if (Settings::Aimbot::silent)
 		return;
 

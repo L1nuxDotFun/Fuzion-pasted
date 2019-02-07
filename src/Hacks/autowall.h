@@ -18,6 +18,6 @@ namespace Autowall
 		int penetrate_count;
 	};
 
-	float GetDamage(const Vector& vecPoint, int target, bool teamCheck, FireBulletData& fData);
-	float GetDamageCustom(const Vector& vecPoint, const Vector& local, int target, bool teamCheck, FireBulletData& fData);
+	float GetDamage(const Vector& point, bool teamCheck, FireBulletData& fData, int playerid);
+	float GetDamageCustom(C_BasePlayer* player, Vector eyePos, const Vector& point, bool teamCheck, FireBulletData& fData, int playerid);
 }

@@ -571,7 +571,7 @@ static void DrawAutoWall(C_BasePlayer *player)
 			continue;
 
 		Autowall::FireBulletData data;
-		float damage = Autowall::GetDamage(bone3D, player->GetIndex(), !Settings::Aimbot::friendly, data);
+		float damage = Autowall::GetDamage(bone3D, !Settings::Aimbot::friendly, data, player->GetIndex());
 		std::stringstream stream;
 		stream << std::fixed << std::setprecision(0) << damage;
 		std::string output = stream.str();
@@ -623,7 +623,7 @@ static void DrawAutoWall(C_BasePlayer *player)
 	Autowall::FireBulletData data;
 	for( int i = 0; i < 11; i++ )
 	{
-		float damage = Autowall::GetDamage(headPoints[i], player->GetIndex(), !Settings::Aimbot::friendly, data);
+		float damage = Autowall::GetDamage(headPoints[i], !Settings::Aimbot::friendly, data, player->GetIndex());
 		std::stringstream stream;
 		stream << std::fixed << std::setprecision(0) << damage;
 		std::string output = stream.str();
