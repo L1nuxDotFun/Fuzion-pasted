@@ -40,7 +40,7 @@ sudo pacman -S base-devel cmake gdb git sdl2 lua xdotool patchelf
 #### Download SpaceHook-pasted-meme-hack-4-free:
 
 ```bash
-git clone --recursive https://github.com/LWSS/Fuzion
+git clone --recursive https://github.com/L1nuxDotFun/space-hook
 ```
 
 ===================
@@ -62,6 +62,7 @@ who even....
 
 ## Configs
 selling on my sel.... i mean wat no, this aint wendusws p2c
+
 well ok, [here](https://github.com/L1nuxDotFun/space-hook-config)
 ## Grenade Configs
 no
