@@ -1,7 +1,9 @@
 <p align="center">
 <img src="https://i.imgur.com/2YtOucm.png"><br>v0.1
-</p>
-### Feature list <br>
+</p> <br>
+
+### Feature list <br
+
 - Desync
 
 ## How to install <br>
