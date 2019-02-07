@@ -2,7 +2,7 @@
 <img src="https://i.imgur.com/2YtOucm.png"><br>v0.1
 </p> <br>
 
-### Feature list <br
+### Feature list <br>
 
 - Desync
 
