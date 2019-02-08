@@ -6,7 +6,9 @@
 ### Feature list <br>
 
 - Desync
-
+- Forced resolver
+- Pasted GUI (Son:tm:)
+- 
 ## How to install <br>
 
 Debian based: <br>
