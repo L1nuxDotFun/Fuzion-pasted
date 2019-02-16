@@ -13,4 +13,5 @@ namespace AntiAim
 
 	float GetMaxDelta( CCSGOAnimState *animState );
 	extern QAngle real;
+	extern QAngle fake;
 }

@@ -2,13 +2,17 @@
 #include "autowall.h"
 
 bool Settings::AntiAim::Yaw::enabled = false;
-bool Settings::AntiAim::Pitch::enabled = false;
-AntiAimType_Y Settings::AntiAim::Yaw::type = AntiAimType_Y::SPIN_FAST;
-bool Settings::AntiAim::Yaw::antiResolver = false;
-AntiAimType_X Settings::AntiAim::Pitch::type = AntiAimType_X::STATIC_DOWN;
 bool Settings::AntiAim::FreeStanding::enabled = false;
+bool Settings::AntiAim::Pitch::enabled = false;
+bool Settings::AntiAim::Fake::enabled = false;
+AntiAimType_Y Settings::AntiAim::Yaw::type = AntiAimType_Y::SPIN_FAST;
+AntiAimType_X Settings::AntiAim::Pitch::type = AntiAimType_X::STATIC_DOWN;
+AntiAimType_Fake Settings::AntiAim::Fake::type = AntiAimType_Fake::STATIC_LEFT;
 bool Settings::AntiAim::AutoDisable::noEnemy = false;
 bool Settings::AntiAim::AutoDisable::knifeHeld = false;
+
+QAngle AntiAim::real;
+QAngle AntiAim::fake;
 
 static bool GetBestHeadAngle(QAngle& angle)
 {
@@ -150,10 +154,10 @@ static bool HasViableEnemy()
 
 	return false;
 }
-static void DoAntiAimY(QAngle& angle, int command_number, bool& clamp)
+
+static void DoAntiAimY(QAngle& angle, bool& clamp)
 {
 	AntiAimType_Y aa_type = Settings::AntiAim::Yaw::type;
-	AntiAimType_Y aa_manual = AntiAimType_Y::BACKWARDS;
 
 	static bool yFlip;
 	float temp;
@@ -341,6 +345,31 @@ static void DoAntiAimX(QAngle& angle, bool& clamp)
 	}
 }
 
+static void DoAntiAimFake(QAngle &angle, CCSGOAnimState* animState)
+{
+	if (!animState)
+		return;
+
+	float maxDelta = AntiAim::GetMaxDelta(animState);
+	static bool yFlip = false;
+
+	switch (Settings::AntiAim::Fake::type)
+	{
+		case AntiAimType_Fake::STATIC_LEFT:
+			angle.y += maxDelta;
+			break;
+
+		case AntiAimType_Fake::STATIC_RIGHT:
+			angle.y -= maxDelta;
+			break;
+
+		case AntiAimType_Fake::JITTER:
+			angle.y += yFlip ? maxDelta : -1 * maxDelta;
+			yFlip = !yFlip;
+			break;
+	}
+}
+
 void AntiAim::CreateMove(CUserCmd* cmd)
 {
 	if (!Settings::AntiAim::Yaw::enabled && !Settings::AntiAim::Pitch::enabled)
@@ -361,6 +390,10 @@ void AntiAim::CreateMove(CUserCmd* cmd)
 
 	C_BaseCombatWeapon* activeWeapon = (C_BaseCombatWeapon*) entityList->GetClientEntityFromHandle(localplayer->GetActiveWeapon());
 	if (!activeWeapon)
+		return;
+
+	CCSGOAnimState* animState = localplayer->GetAnimState();
+	if (!animState)
 		return;
 
 	if (activeWeapon->GetCSWpnData()->GetWeaponType() == CSWeaponType::WEAPONTYPE_GRENADE)
@@ -389,6 +422,9 @@ void AntiAim::CreateMove(CUserCmd* cmd)
 	QAngle edge_angle = angle;
 	bool freestanding = Settings::AntiAim::FreeStanding::enabled && GetBestHeadAngle(edge_angle);
 
+	static bool bSend = true;
+	bSend = !bSend;
+
 	bool should_clamp = true;
 
 	if (!ValveDSCheck::forceUT && (*csGameRules) && (*csGameRules)->IsValveDS())
@@ -402,11 +438,19 @@ void AntiAim::CreateMove(CUserCmd* cmd)
 
 	if (Settings::AntiAim::Yaw::enabled)
 	{
-		DoAntiAimY(angle, cmd->command_number, should_clamp);
-		Math::NormalizeAngles(angle);
+		DoAntiAimY(angle, should_clamp);
+
 		if (freestanding)
 			angle.y = edge_angle.y;
+
+        Math::NormalizeAngles(angle);
 	}
+
+	if (Settings::AntiAim::Fake::enabled && !bSend)
+    {
+	    DoAntiAimFake(angle, animState);
+        Math::NormalizeAngles(angle);
+    }
 
 	if (Settings::AntiAim::Pitch::enabled)
 		DoAntiAimX(angle, should_clamp);
@@ -417,27 +461,11 @@ void AntiAim::CreateMove(CUserCmd* cmd)
 		Math::ClampAngles(angle);
 	}
 
+	CreateMove::sendPacket = bSend;
+	if (bSend)
+	    real = angle;
+    else
+        fake = angle;
 	cmd->viewangles = angle;
-
-	if (Settings::AntiAim::Yaw::antiResolver)
-	{
-		static bool antiResolverFlip = false;
-		if (cmd->viewangles.y == *localplayer->GetLowerBodyYawTarget())
-		{
-			if (antiResolverFlip)
-				cmd->viewangles.y += 60.f;
-			else
-				cmd->viewangles.y -= 60.f;
-
-			antiResolverFlip = !antiResolverFlip;
-
-			if (should_clamp)
-			{
-				Math::NormalizeAngles(cmd->viewangles);
-				Math::ClampAngles(cmd->viewangles);
-			}
-		}
-	}
-
 	Math::CorrectMovement(oldAngle, cmd, oldForward, oldSideMove);
 }

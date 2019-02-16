@@ -12,6 +12,10 @@ void HvH::RenderTab()
 			"LISP DOWN", "ANGEL DOWN", "ANGEL UP", // untrusted
 	};
 
+	const char* fTypes[] = {
+			"LEFT", "RIGHT", "JITTER"
+	};
+
 	ImGui::Columns(2, NULL, true);
 	{
 		ImGui::BeginChild(XORSTR("HVH1"), ImVec2(0, 0), true);
@@ -25,7 +29,7 @@ void HvH::RenderTab()
 				{
 					ImGui::ItemSize(ImVec2(0.0f, 0.0f), 0.0f);
 					ImGui::Text(XORSTR("Yaw Actual"));
-					ImGui::Checkbox(XORSTR("Anti Resolver"), &Settings::AntiAim::Yaw::antiResolver);
+
 				}
 				ImGui::NextColumn();
 				{
@@ -39,6 +43,7 @@ void HvH::RenderTab()
 							ImGui::OpenPopup(XORSTR("Error###UNTRUSTED_AA"));
 						}
 					}
+
 					ImGui::PopItemWidth();
 				}
 				ImGui::Columns(1);
@@ -61,6 +66,21 @@ void HvH::RenderTab()
 							ImGui::OpenPopup(XORSTR("Error###UNTRUSTED_AA"));
 						}
 					}
+					ImGui::PopItemWidth();
+				}
+				ImGui::Columns(1);
+				ImGui::Separator();
+				ImGui::Checkbox(XORSTR("Desync Yaw"), &Settings::AntiAim::Fake::enabled);
+				ImGui::Separator();
+				ImGui::Columns(2, NULL, true);
+				{
+					ImGui::ItemSize(ImVec2(0.0f, 0.0f), 0.0f);
+					ImGui::Text(XORSTR("Desync"));
+				}
+				ImGui::NextColumn();
+				{
+					ImGui::PushItemWidth(-1);
+					ImGui::Combo(XORSTR("##YAWFAKETYPE"), (int*)& Settings::AntiAim::Fake::type, fTypes, IM_ARRAYSIZE(fTypes));
 					ImGui::PopItemWidth();
 				}
 				ImGui::Columns(1);

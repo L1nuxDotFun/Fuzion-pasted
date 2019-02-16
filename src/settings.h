@@ -85,6 +85,13 @@ enum class AntiAimType_X : int
 	ANGEL_UP,
 };
 
+enum class AntiAimType_Fake : int
+{
+	STATIC_LEFT,
+	STATIC_RIGHT,
+	JITTER
+};
+
 enum class ChamsType : int
 {
 	CHAMS,
@@ -546,7 +553,11 @@ namespace Settings
 		{
 			extern bool enabled;
 			extern AntiAimType_Y type;
-			extern bool antiResolver;
+		}
+
+		namespace FreeStanding
+		{
+			extern bool enabled;
 		}
 
 		namespace Pitch
@@ -555,9 +566,10 @@ namespace Settings
 			extern AntiAimType_X type;
 		}
 
-		namespace FreeStanding
+		namespace Fake
 		{
 			extern bool enabled;
+			extern AntiAimType_Fake type;
 		}
 	}
 

@@ -1,7 +1,6 @@
 #include "hooks.h"
 
 bool CreateMove::sendPacket = true;
-QAngle CreateMove::real;
 
 bool Hooks::CreateMove(void* thisptr, float flInputSampleTime, CUserCmd* cmd)
 {
@@ -40,8 +39,6 @@ bool Hooks::CreateMove(void* thisptr, float flInputSampleTime, CUserCmd* cmd)
 		PredictionSystem::EndPrediction();
 
 		EdgeJump::PostPredictionCreateMove(cmd);
-		CreateMove::real = cmd->viewangles;
-
 		ClanTagChanger::CreateMove();
 	}
 
