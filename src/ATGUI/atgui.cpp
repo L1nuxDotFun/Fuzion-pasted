@@ -81,7 +81,7 @@ void SetupMainMenuBar()
 
 		ImGui::SameLine(ImGui::GetWindowContentRegionMax().x-ImVec2(ImGui::CalcTextSize(XORSTR("Unload   "), NULL, true)).x);
 
-		if( ImGui::Button(XORSTR("Unload   "), ImVec2(ImGui::CalcTextSize(XORSTR("Unload   "), NULL, true).x, 0.0f)) )
+		if( ImGui::Button(XORSTR("Unload Cheat   "), ImVec2(ImGui::CalcTextSize(XORSTR("Unload Cheat   "), NULL, true).x, 0.0f)) )
 		{
 			SpaceHook::SelfShutdown();
 		}
@@ -99,7 +99,7 @@ void UI::SwapWindow()
 	if (engine->IsInGame())
 		return;
 
-    Draw::ImText( ImVec2( 4.f, 4.f ), ImColor( 255, 255, 255, 255 ), XORSTR( "SpaceHook" ), NULL, 0.0f, NULL,
+    Draw::ImText( ImVec2( 4.f, 4.f ), ImColor( 255, 255, 255, 255 ), XORSTR( "SpaceHook II - W.I.P " ), NULL, 0.0f, NULL,
                   ImFontFlags_Shadow );
 }
 
@@ -130,4 +130,5 @@ void UI::SetupWindows()
 
 	ShowSpectators::RenderWindow();
 	Radar::RenderWindow();
+	
 }
