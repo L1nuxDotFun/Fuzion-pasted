@@ -72,6 +72,10 @@ static void DrawPlayer(void* thisptr, void* context, void *state, const ModelRen
 
 		visible_material->ColorModulate(visColor);
 		hidden_material->ColorModulate(color);
+		//AlphaModulate for localplayer chams. 
+		visible_material->AlphaModulate(Settings::ESP::Chams::localplayerColor.Color(entity).Value.w);
+		hidden_material->AlphaModulate(Settings::ESP::Chams::localplayerColor.Color(entity).Value.w);
+
 	}
 	else if (entity->GetTeam() == localplayer->GetTeam())
 	{
