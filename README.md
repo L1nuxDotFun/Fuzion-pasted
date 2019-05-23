@@ -1,5 +1,5 @@
 <p align="center">
-  Fuzion > Space!Hook<br>
+  Fuzion > Space!Hook V2<br>
   <img src="https://flat.badgen.net/badge/VAC/Caution/yellow?icon=terminal"><br>
   <img src="https://forthebadge.com/images/badges/made-with-c.svg">
   <img src="https://forthebadge.com/images/badges/made-with-c-plus-plus.svg">
@@ -11,20 +11,37 @@
 - Desync
 - Forced resolver
 - Pasted GUI (Son:tm:)
-- 
+- Fixed Crashing with danger zone update
+## Coming Soon!
+- Fixed for danger zone so you don't get low fps
+-Maybe Better AA
+- Synced Clantag
+-Remove useless shit 
+
 ## How to install <br>
 
 Debian based: <br>
+sudo apt-get install cmake g++ gdb git libsdl2-dev zlib1g-dev
 
 Arch: <br>
+sudo pacman -S base-devel cmake gdb git sdl2
 
+Gentoo: <br>
+sudo emerge cmake dev-vcs/git gdb libsdl2 mesa
+
+Fedora: <br>
+sudo dnf install cmake gcc-c++ gdb git libstdc++-static mesa-libGL-devel SDL2-devel zlib-devel
+
+openSUSE: <br> 
+sudo zypper install cmake gcc-c++ gdb git Mesa-libGL-devel SDL2-devel zlib-devel
 
 # Screenshots
 *screenshots here*
+*how about no*
 
 
 
 # Credits:
 - Aimtux/Fuzion for being a base
-- 
+- xDylan#0376 - For actaully fixing this dead thing
 - 
