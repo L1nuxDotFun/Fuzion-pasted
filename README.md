@@ -1,5 +1,5 @@
 <p align="center">
-  Fuzion > Space!Hook V2<br>
+  Space!Hook V2 > aqua!Hook <br>
   <img src="https://flat.badgen.net/badge/VAC/Caution/yellow?icon=terminal"><br>
   <img src="https://forthebadge.com/images/badges/made-with-c.svg">
   <img src="https://forthebadge.com/images/badges/made-with-c-plus-plus.svg">
