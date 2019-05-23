@@ -17,6 +17,7 @@
 -Maybe Better AA
 - Synced Clantag
 -Remove useless shit 
+-Fix AUtowall, Maybe Tommorow
 
 ## How to install <br>
 
