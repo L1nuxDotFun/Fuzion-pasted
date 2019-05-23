@@ -100,6 +100,7 @@ void Offsets::GetOffsets()
 	offsets.DT_CSPlayer.m_flFlashDuration = NetVarManager::GetOffset(tables, XORSTR("DT_CSPlayer"), XORSTR("m_flFlashDuration"));
 	offsets.DT_CSPlayer.m_flFlashMaxAlpha = NetVarManager::GetOffset(tables, XORSTR("DT_CSPlayer"), XORSTR("m_flFlashMaxAlpha"));
 	offsets.DT_CSPlayer.m_flLowerBodyYawTarget = NetVarManager::GetOffset(tables, XORSTR("DT_CSPlayer"), XORSTR("m_flLowerBodyYawTarget"));
+	
 
 	offsets.DT_BaseAttributableItem.m_iItemDefinitionIndex = NetVarManager::GetOffset(tables, XORSTR("DT_BaseAttributableItem"), XORSTR("m_iItemDefinitionIndex"));
 	offsets.DT_BaseAttributableItem.m_iItemIDHigh = NetVarManager::GetOffset(tables, XORSTR("DT_BaseAttributableItem"), XORSTR("m_iItemIDHigh"));
@@ -110,18 +111,18 @@ void Offsets::GetOffsets()
 	offsets.DT_BaseAttributableItem.m_nFallbackSeed = NetVarManager::GetOffset(tables, XORSTR("DT_BaseAttributableItem"), XORSTR("m_nFallbackSeed"));
 	offsets.DT_BaseAttributableItem.m_flFallbackWear = NetVarManager::GetOffset(tables, XORSTR("DT_BaseAttributableItem"), XORSTR("m_flFallbackWear"));
 	offsets.DT_BaseAttributableItem.m_nFallbackStatTrak = NetVarManager::GetOffset(tables, XORSTR("DT_BaseAttributableItem"), XORSTR("m_nFallbackStatTrak"));
-
+	
 	offsets.DT_BaseViewModel.m_nModelIndex = NetVarManager::GetOffset(tables, XORSTR("DT_BaseViewModel"), XORSTR("m_nModelIndex"));
 	offsets.DT_BaseViewModel.m_hWeapon = NetVarManager::GetOffset(tables, XORSTR("DT_BaseViewModel"), XORSTR("m_hWeapon"));
 	offsets.DT_BaseViewModel.m_hOwner = NetVarManager::GetOffset(tables, XORSTR("DT_BaseViewModel"), XORSTR("m_hOwner"));
 
 	offsets.DT_WeaponCSBase.m_bReloadVisuallyComplete = NetVarManager::GetOffset(tables, XORSTR("DT_WeaponCSBase"), XORSTR("m_bReloadVisuallyComplete"));
 	offsets.DT_WeaponCSBase.m_fAccuracyPenalty = NetVarManager::GetOffset(tables, XORSTR("DT_WeaponCSBase"), XORSTR("m_fAccuracyPenalty"));
+    offsets.DT_WeaponCSBase.m_flPostponeFireReadyTime = NetVarManager::GetOffset(tables, XORSTR("DT_WeaponCSBase"), XORSTR("m_flPostponeFireReadyTime"));
 
 	offsets.DT_WeaponC4.m_bStartedArming = NetVarManager::GetOffset(tables, XORSTR("DT_WeaponC4"), XORSTR("m_bStartedArming"));
 
 	offsets.DT_BaseCombatWeapon.m_flNextPrimaryAttack = NetVarManager::GetOffset(tables, XORSTR("DT_BaseCombatWeapon"), XORSTR("m_flNextPrimaryAttack"));
-	offsets.DT_WeaponCSBase.m_flPostponeFireReadyTime = NetVarManager::GetOffset(tables, "DT_WeaponCSBase", "m_flPostponeFireReadyTime");
 	offsets.DT_BaseCombatWeapon.m_hOwner = NetVarManager::GetOffset(tables, XORSTR("DT_BaseCombatWeapon"), XORSTR("m_hOwner"));
 	offsets.DT_BaseCombatWeapon.m_iClip1 = NetVarManager::GetOffset(tables, XORSTR("DT_BaseCombatWeapon"), XORSTR("m_iClip1"));
 	offsets.DT_BaseCombatWeapon.m_bInReload = offsets.DT_BaseCombatWeapon.m_flNextPrimaryAttack + 113;
