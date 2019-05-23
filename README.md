@@ -21,19 +21,19 @@
 ## How to install <br>
 
 Debian based: <br>
-sudo apt-get install cmake g++ gdb git libsdl2-dev zlib1g-dev
+```sudo apt-get install cmake g++ gdb git libsdl2-dev zlib1g-dev```
 
 Arch: <br>
-sudo pacman -S base-devel cmake gdb git sdl2
+```sudo pacman -S base-devel cmake gdb git sdl2```
 
 Gentoo: <br>
-sudo emerge cmake dev-vcs/git gdb libsdl2 mesa
+```sudo emerge cmake dev-vcs/git gdb libsdl2 mesa```
 
 Fedora: <br>
-sudo dnf install cmake gcc-c++ gdb git libstdc++-static mesa-libGL-devel SDL2-devel zlib-devel
+```sudo dnf install cmake gcc-c++ gdb git libstdc++-static mesa-libGL-devel SDL2-devel zlib-devel```
 
 openSUSE: <br> 
-sudo zypper install cmake gcc-c++ gdb git Mesa-libGL-devel SDL2-devel zlib-devel
+```sudo zypper install cmake gcc-c++ gdb git Mesa-libGL-devel SDL2-devel zlib-devel```
 
 # Screenshots
 *screenshots here*
@@ -43,4 +43,4 @@ sudo zypper install cmake gcc-c++ gdb git Mesa-libGL-devel SDL2-devel zlib-devel
 
 # Credits:
 - Aimtux/Fuzion for being a base
-- xDylan#0376 - For actaully fixing this dead thing
+- xDylan#0376 - **For actaully fixing this dead thing**
