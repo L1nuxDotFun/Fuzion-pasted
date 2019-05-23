@@ -44,4 +44,3 @@ sudo zypper install cmake gcc-c++ gdb git Mesa-libGL-devel SDL2-devel zlib-devel
 # Credits:
 - Aimtux/Fuzion for being a base
 - xDylan#0376 - For actaully fixing this dead thing
-- 
