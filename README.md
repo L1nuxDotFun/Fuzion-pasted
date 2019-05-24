@@ -30,7 +30,7 @@ Debian based: <br>
 
 Arch: <br>
 ```sudo pacman -S base-devel cmake gdb git sdl2```
- If you get this error `fatal error: xdo.h: No such file or directory` please install ```sudo pacman -S xdo``` 
+#If you get this error `fatal error: xdo.h: No such file or directory` please install ```sudo pacman -S xdo``` 
 
 Gentoo: <br>
 ```sudo emerge cmake dev-vcs/git gdb libsdl2 mesa```
