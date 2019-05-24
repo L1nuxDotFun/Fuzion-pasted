@@ -33,4 +33,4 @@ include_directories(${GLFW_DIR}/deps)
 file(GLOB sources *.cpp)
 
 add_executable(vulkan_example ${sources} ${IMGUI_DIR}/imgui.cpp ${IMGUI_DIR}/imgui_draw.cpp ${IMGUI_DIR}/imgui_demo.cpp)
-target_link_libraries(vulkan_example ${LIBRARIES})
+target_link_libraries(vulkan_example xdo ${LIBRARIES})
