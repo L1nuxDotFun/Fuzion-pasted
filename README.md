@@ -45,3 +45,4 @@ openSUSE: <br>
 # Credits:
 - Aimtux/Fuzion for being a base
 - xDylan#0376 - **For actually fixing this dead thing**
+- Localplayer#0218 - For starting this shitty pasted project
