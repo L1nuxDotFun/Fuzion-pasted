@@ -1,5 +1,9 @@
 #include "autowall.h"
-#define CHAR_TEX_GLASS	'Y'
+
+#include "aimbot.h"
+#include "../Utils/math.h"
+#include "../Utils/entity.h"
+#include "../interfaces.h"
 
 static float GetHitgroupDamageMultiplier(HitGroups iHitGroup)
 {
@@ -36,8 +40,6 @@ static void ScaleDamage(HitGroups hitgroup, C_BasePlayer* enemy, float weapon_ar
 			current_damage *= weapon_armor_ratio * 0.5f;
 	}
 }
-
-
 
 static bool TraceToExit(Vector& end, trace_t* enter_trace, Vector start, Vector dir, trace_t* exit_trace)
 {
@@ -216,10 +218,9 @@ static bool SimulateFireBullet(C_BaseCombatWeapon* pWeapon, bool teamCheck, Auto
 			data.trace_length += data.enter_trace.fraction * data.trace_length_remaining;
 			data.current_damage *= powf(weaponInfo->GetRangeModifier(), data.trace_length * 0.002f);
 
-			
-            C_BasePlayer* player = (C_BasePlayer*) data.enter_trace.m_pEntityHit;
-            if (teamCheck && player->GetTeam() == localplayer->GetTeam())
-                return false;
+			C_BasePlayer* player = (C_BasePlayer*) data.enter_trace.m_pEntityHit;
+			if (teamCheck && player->GetTeam() == localplayer->GetTeam())
+				return false;
 
 			ScaleDamage(data.enter_trace.hitgroup, player, weaponInfo->GetWeaponArmorRatio(), data.current_damage);
 
@@ -233,7 +234,7 @@ static bool SimulateFireBullet(C_BaseCombatWeapon* pWeapon, bool teamCheck, Auto
 	return false;
 }
 
-float Autowall::GetDamage(const Vector& point, bool teamCheck, FireBulletData& fData, int playerid)
+float Autowall::GetDamage(const Vector& point, bool teamCheck, FireBulletData& fData)
 {
 	float damage = 0.f;
 	Vector dst = point;
