@@ -29,7 +29,7 @@ Debian based: <br>
   If you get this error `fatal error: xdo.h: No such file or directory` please install ```sudo apt install libxdo-dev```
 
 Arch: <br>
-```sudo pacman -S base-devel cmake gdb git sdl2``` <br> 
+```sudo pacman -S base-devel cmake gdb git sdl2 patchelf``` <br> 
 **If you get this error:** `fatal error: xdo.h: No such file or directory` please install ```sudo pacman -S xdo``` 
 
 Gentoo: <br>
