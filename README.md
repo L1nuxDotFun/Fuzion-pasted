@@ -3,7 +3,7 @@
   <img src="https://flat.badgen.net/badge/VAC/Undetected./green?icon=terminal"><br>
   <img src="https://forthebadge.com/images/badges/made-with-c.svg">
   <img src="https://forthebadge.com/images/badges/made-with-c-plus-plus.svg">
-<img src="https://i.imgur.com/2YtOucm.png"><br>v2
+<img src="https://i.ibb.co/YjHMLYd/niggatoni.png"><br>v2
 </p> <br>
 
 ### Feature list <br>
