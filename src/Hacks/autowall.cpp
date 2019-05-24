@@ -234,7 +234,7 @@ static bool SimulateFireBullet(C_BaseCombatWeapon* pWeapon, bool teamCheck, Auto
 	return false;
 }
 
-float Autowall::GetDamage(const Vector& point, bool teamCheck, FireBulletData& fData)
+float Autowall::GetDamage(const Vector& point, bool teamCheck, FireBulletData& fData, int playerid)
 {
 	float damage = 0.f;
 	Vector dst = point;
