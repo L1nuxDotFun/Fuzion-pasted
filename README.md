@@ -44,4 +44,4 @@ openSUSE: <br>
 
 # Credits:
 - Aimtux/Fuzion for being a base
-- xDylan#0376 - **For actaully fixing this dead thing**
+- xDylan#0376 - **For actually fixing this dead thing**
