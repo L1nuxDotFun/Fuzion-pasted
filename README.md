@@ -12,12 +12,12 @@
 - Forced resolver
 - Pasted GUI (Son:tm:)
 - Fixed Crashing with danger zone update
+
 ## Coming Soon!
 - Fixed for danger zone so you don't get low fps
 -Maybe Better AA
 - Synced Clantag
 -Remove useless shit 
--Fix AUtowall, Maybe Tommorow
 
 ## How to install <br>
 
