@@ -418,7 +418,7 @@ void Aimbot::RenderTab()
 			{
 				if (!silent)
 				{
-					if (ImGui::Checkbox(XORSTR("Mouse Movement"), &moveMouse))
+					//if (ImGui::Checkbox(XORSTR("Mouse Movement"), &moveMouse))
 						UI::UpdateWeaponSettings();
 				}
 	
