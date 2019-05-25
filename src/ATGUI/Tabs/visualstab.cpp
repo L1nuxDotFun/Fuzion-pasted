@@ -208,25 +208,27 @@ void Visuals::RenderTab()
 				ImGui::Checkbox(XORSTR("Weapons"), &Settings::ESP::Chams::Weapon::enabled);
 				ImGui::Checkbox(XORSTR("No Sky"), &Settings::NoSky::enabled);
 				ImGui::Checkbox(XORSTR("No Smoke"), &Settings::NoSmoke::enabled);
-				ImGui::Checkbox(XORSTR("Grenade Prediction"), &Settings::ESP::GrenadePrediction::enabled);
-				ImGui::Checkbox(XORSTR("Log Shots"), &Settings::LogShots::enabled);
+				//ImGui::Checkbox(XORSTR("Grenade Prediction"), &Settings::ESP::GrenadePrediction::enabled);
+				//ImGui::Checkbox(XORSTR("Log Shots"), &Settings::LogShots::enabled);
 			}
 			ImGui::NextColumn();
 			{
 				ImGui::PushItemWidth(-1);
 				ImGui::Combo(XORSTR("##ARMSTYPE"), (int*)& Settings::ESP::Chams::Arms::type, ArmsTypes, IM_ARRAYSIZE(ArmsTypes));
-				ImGui::SliderFloat(XORSTR("##DLIGHTRADIUS"), &Settings::Dlights::radius, 0, 1000, XORSTR("Radius: %0.f"));
+				//ImGui::SliderFloat(XORSTR("##DLIGHTRADIUS"), &Settings::Dlights::radius, 0, 1000, XORSTR("Radius: %0.f"));
 				ImGui::SliderFloat(XORSTR("##NOFLASHAMOUNT"), &Settings::Noflash::value, 0, 255, XORSTR("Amount: %0.f"));
 				ImGui::SliderInt(XORSTR("##SOUNDSTIME"), &Settings::ESP::Sounds::time, 250, 5000, XORSTR("Timeout: %0.f"));
 				ImGui::PopItemWidth();
 				ImGui::Checkbox(XORSTR("No Aim Punch"), &Settings::View::NoAimPunch::enabled);
 				ImGui::Checkbox(XORSTR("ASUS Walls"), &Settings::ASUSWalls::enabled);
 				ImGui::Checkbox(XORSTR("No Scope Border"), &Settings::NoScopeBorder::enabled);
-				ImGui::Checkbox(XORSTR("Autowall Debug"), &Settings::Debug::AutoWall::debugView);
-				ImGui::Checkbox(XORSTR("AimSpot Debug"), &Settings::Debug::AutoAim::drawTarget);
-				ImGui::Checkbox(XORSTR("BoneMap Debug"), &Settings::Debug::BoneMap::draw);
-				if( Settings::Debug::BoneMap::draw )
-					ImGui::Checkbox(XORSTR("Just Dots"), &Settings::Debug::BoneMap::justDrawDots);
+				ImGui::Checkbox(XORSTR("Grenade Prediction"), &Settings::ESP::GrenadePrediction::enabled);
+				ImGui::Checkbox(XORSTR("Log Shots"), &Settings::LogShots::enabled);
+				//ImGui::Checkbox(XORSTR("Autowall Debug"), &Settings::Debug::AutoWall::debugView);
+				//ImGui::Checkbox(XORSTR("AimSpot Debug"), &Settings::Debug::AutoAim::drawTarget);
+				//ImGui::Checkbox(XORSTR("BoneMap Debug"), &Settings::Debug::BoneMap::draw);
+				//if( Settings::Debug::BoneMap::draw )
+				//	ImGui::Checkbox(XORSTR("Just Dots"), &Settings::Debug::BoneMap::justDrawDots);
 
 			}
 			ImGui::Columns(1);
