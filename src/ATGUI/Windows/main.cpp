@@ -35,7 +35,7 @@ void Main::RenderWindow()
 		Settings::UI::Windows::Main::posY = (int)temp.y;
 		const char* tabs[] = {
 				"Aimbot",
-				"Triggerbot",
+				//"Triggerbot", // commented out because i dont need it.
 				"Visuals",
 				"HvH",
 				"Misc",
@@ -68,16 +68,16 @@ void Main::RenderWindow()
 			case 0:
 				Aimbot::RenderTab();
 				break;
-			case 1:
-				Triggerbot::RenderTab();
+				//case 1:
+				//Triggerbot::RenderTab();
 				break;
-			case 2:
+			case 1:
 				Visuals::RenderTab();
 				break;
-			case 3:
+			case 2:
 				HvH::RenderTab();
 				break;
-			case 4:
+			case 3:
 				Misc::RenderTab();
 				break;
 		}
