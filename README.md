@@ -12,6 +12,7 @@
 - Forced resolver
 - Pasted GUI (Son:tm:)
 - Fixed Crashing with danger zone update
+- Remasterd Aimtux GUI ( made it more modern )
 
 ## Coming Soon!
 - Fixed for danger zone so you don't get low fps
