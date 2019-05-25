@@ -27,7 +27,7 @@
 
 Debian based: <br>
 ```sudo apt-get install cmake g++ gdb git libsdl2-dev zlib1g-dev```<br> 
-  If you get this error `fatal error: xdo.h: No such file or directory` please install ```sudo apt install libxdo-dev```
+  **If you get this error** `fatal error: xdo.h: No such file or directory` please install ```sudo apt install libxdo-dev```
 
 Arch: <br>
 ```sudo pacman -S base-devel cmake gdb git sdl2 patchelf``` <br> 
@@ -35,15 +35,15 @@ Arch: <br>
 
 Gentoo: <br>
 ```sudo emerge cmake dev-vcs/git gdb libsdl2 mesa``` <br> 
-   If you get this error `fatal error: xdo.h: No such file or directory` please install ```sudo emerge x11/misc/xdo ```
+   **If you get this error** `fatal error: xdo.h: No such file or directory` please install ```sudo emerge x11/misc/xdo ```
 
 Fedora: <br>
 ```sudo dnf install cmake gcc-c++ gdb git libstdc++-static mesa-libGL-devel SDL2-devel zlib-devel``` <br> 
-  If you get this error `fatal error: xdo.h: No such file or directory` please install ```sudo dnf install libxdo-devel ```
+  **If you get this error** `fatal error: xdo.h: No such file or directory` please install ```sudo dnf install libxdo-devel ```
 
 openSUSE: <br> 
 ```sudo zypper install cmake gcc-c++ gdb git Mesa-libGL-devel SDL2-devel zlib-devel``` <br> 
-  If you get this error `fatal error: xdo.h: No such file or directory` please install ```sudo zypper install xdotool ```
+  **If you get this error** `fatal error: xdo.h: No such file or directory` please install ```sudo zypper install xdotool ```
 
 # Screenshots
 <a href="https://ibb.co/Y7hMcPr"><img src="https://i.ibb.co/MD74cZX/image.png" alt="image" border="0"></a>
