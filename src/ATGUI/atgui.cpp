@@ -9,18 +9,18 @@ ColorVar Settings::UI::bodyColor = ImColor(5, 5, 5, 255);
 ColorVar Settings::UI::fontColor = ImColor(255, 255, 255, 255);
 ColorVar Settings::UI::accentColor = ImColor(39, 106, 219, 255);
 /* Window Position/Size Defaults */
-int Settings::UI::Windows::Colors::sizeX = 540;
-int Settings::UI::Windows::Colors::sizeY = 325;
-int Settings::UI::Windows::Colors::posX = 540;
+int Settings::UI::Windows::Colors::sizeX = 550;
+int Settings::UI::Windows::Colors::sizeY = 425;
+int Settings::UI::Windows::Colors::posX = 960;
 int Settings::UI::Windows::Colors::posY = 325;
 
 int Settings::UI::Windows::Config::sizeX = 185;
-int Settings::UI::Windows::Config::sizeY = 250;
+int Settings::UI::Windows::Config::sizeY = 280;
 int Settings::UI::Windows::Config::posX = 185;
 int Settings::UI::Windows::Config::posY = 250;
 
-int Settings::UI::Windows::Main::sizeX = 960;
-int Settings::UI::Windows::Main::sizeY = 645;
+int Settings::UI::Windows::Main::sizeX = 850;
+int Settings::UI::Windows::Main::sizeY = 800;
 int Settings::UI::Windows::Main::posX = 20;
 int Settings::UI::Windows::Main::posY = 20;
 
@@ -59,7 +59,7 @@ void SetupMainMenuBar()
 {
 	if (ImGui::BeginMainMenuBar())
 	{
-		ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(8 * 2.0f, 4 * 2.0f));
+		ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(10 * 5.0f, 6 * 1.0f));
 
 		ImGui::Selectable(XORSTR("Main Window"), &Main::showWindow, 0, ImVec2(ImGui::CalcTextSize(XORSTR("Main Window"), NULL, true).x, 0.0f));
 		ImGui::SameLine();
@@ -76,7 +76,7 @@ void SetupMainMenuBar()
 		ImGui::Selectable(XORSTR("Colors Window"), &Colors::showWindow, 0, ImVec2(ImGui::CalcTextSize(XORSTR("Colors Window"), NULL, true).x, 0.0f));
 		ImGui::SameLine();
 
-		ImGui::Selectable(XORSTR("Player List Window"), &PlayerList::showWindow, 0, ImVec2(ImGui::CalcTextSize(XORSTR("Player List Window"), NULL, true).x, 0.0f));
+		ImGui::Selectable(XORSTR("About"), &PlayerList::showWindow, 0, ImVec2(ImGui::CalcTextSize(XORSTR("About"), NULL, true).x, 0.0f));
 		ImGui::SameLine();
 
 		ImGui::SameLine(ImGui::GetWindowContentRegionMax().x-ImVec2(ImGui::CalcTextSize(XORSTR("Unload   "), NULL, true)).x);
@@ -90,6 +90,7 @@ void SetupMainMenuBar()
 		ImGui::EndMainMenuBar();
 	}
 }
+
 
 void UI::SwapWindow()
 {
