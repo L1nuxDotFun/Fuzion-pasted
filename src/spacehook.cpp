@@ -119,6 +119,7 @@ void MainThread()
 	srand(time(NULL)); // Seed random # Generator so we can call rand() later
 
     cvar->ConsoleColorPrintf(ColorRGBA(0, 225, 0), XORSTR("\nSpaceHook Successfully loaded.\n"));
+    cvar->ConsoleColorPrintf(ColorRGBA(255, 0, 0), XORSTR("free-as-in-freedom CSGO cheat\n"));
 }
 /* Entrypoint to the Library. Called when loading */
 int __attribute__((constructor)) Startup()
@@ -139,7 +140,6 @@ void __attribute__((destructor)) Shutdown()
 	SDL2::UnhookWindow();
 	SDL2::UnhookPollEvent();
 
-	Aimbot::XDOCleanup();
 	NoSmoke::Cleanup();
 
     for( VMT* vmt : createdVMTs ){
