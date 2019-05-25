@@ -45,7 +45,7 @@ openSUSE: <br>
   If you get this error `fatal error: xdo.h: No such file or directory` please install ```sudo zypper install xdotool ```
 
 # Screenshots
-<img src="https://i.ibb.co/6g5n2Q9/image.png" alt="image" border="0"></a>
+<a href="https://ibb.co/2j16pvQ"><img src="https://i.ibb.co/309sPpq/image.png" alt="screenshot of the menu" border="0"></a>
 
 
 
