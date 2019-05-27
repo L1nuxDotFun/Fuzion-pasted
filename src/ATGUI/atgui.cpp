@@ -10,12 +10,12 @@ ColorVar Settings::UI::fontColor = ImColor(255, 255, 255, 255);
 ColorVar Settings::UI::accentColor = ImColor(39, 106, 219, 255);
 /* Window Position/Size Defaults */
 int Settings::UI::Windows::Colors::sizeX = 600;
-int Settings::UI::Windows::Colors::sizeY = 435;
+int Settings::UI::Windows::Colors::sizeY = 500;
 int Settings::UI::Windows::Colors::posX = 960;
 int Settings::UI::Windows::Colors::posY = 325;
 
-int Settings::UI::Windows::Config::sizeX = 227;
-int Settings::UI::Windows::Config::sizeY = 210;
+int Settings::UI::Windows::Config::sizeX = 237;
+int Settings::UI::Windows::Config::sizeY = 230;
 int Settings::UI::Windows::Config::posX = 185;
 int Settings::UI::Windows::Config::posY = 250;
 
