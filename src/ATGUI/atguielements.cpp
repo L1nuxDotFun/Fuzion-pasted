@@ -228,14 +228,14 @@ void UI::SetupColors()
 	ImVec4 accentColorHovered	= ImVec4(Settings::UI::accentColor.Color().Value.x + 0.1f, Settings::UI::accentColor.Color().Value.y + 0.1f, Settings::UI::accentColor.Color().Value.z + 0.1f, Settings::UI::accentColor.Color().Value.w);
 	ImVec4 accentColorActive = ImVec4(Settings::UI::accentColor.Color().Value.x + 0.2f, Settings::UI::accentColor.Color().Value.y + 0.2f, Settings::UI::accentColor.Color().Value.z + 0.2f, Settings::UI::accentColor.Color().Value.w);
 
-	style.Alpha = 1.0f;
+	style.Alpha = 0.8f;
 	style.WindowPadding = ImVec2(15, 15);
 	style.WindowMinSize = ImVec2(16, 16);
-	style.WindowRounding = 5.0f;
+	style.WindowRounding = 1;
 	style.WindowTitleAlign = ImVec2(0.5f, 0.5f);
-	style.ChildWindowRounding = 0.0f;
+	style.ChildWindowRounding = 3.0f;
 	style.FramePadding = ImVec2(5, 5);
-	style.FrameRounding = 4.0f;
+	style.FrameRounding = 3;
 	style.ItemSpacing = ImVec2(12, 8);
 	style.ItemInnerSpacing = ImVec2(8, 6);
 	style.TouchExtraPadding = ImVec2(0, 2);
@@ -243,7 +243,7 @@ void UI::SetupColors()
 	style.ColumnsMinSpacing = 3.0f;
 	style.ScrollbarSize = 15.0f;;
 	style.ScrollbarRounding = 0.0f;
-	style.GrabMinSize = 5.0f;
+	style.GrabMinSize = 20.0f;
 	style.GrabRounding = 3.0f;
 	style.ButtonTextAlign = ImVec2(0.5f, 0.5f);
 	style.DisplayWindowPadding = ImVec2(22, 22);
@@ -253,20 +253,20 @@ void UI::SetupColors()
 	style.CurveTessellationTol = 1.25f;
 
 	style.Colors[ImGuiCol_Text] = Settings::UI::fontColor.Color();
-	style.Colors[ImGuiCol_TextDisabled] = ImVec4(0.24f, 0.23f, 0.29f, 1.00f);
+	style.Colors[ImGuiCol_TextDisabled] = ImVec4(0.00f, 0.40f, 0.41f, 1.00f);
 	style.Colors[ImGuiCol_WindowBg] = Settings::UI::bodyColor.Color();
 	style.Colors[ImGuiCol_ChildWindowBg] = ImVec4(.0f, .0f, .0f, .0f);
 	style.Colors[ImGuiCol_PopupBg] = tooltipBgColor;
 	style.Colors[ImGuiCol_Border] = Settings::UI::mainColor.Color();
-	style.Colors[ImGuiCol_BorderShadow] = ImVec4(0.92f, 0.91f, 0.88f, 0.00f);
+	style.Colors[ImGuiCol_BorderShadow] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
 	style.Colors[ImGuiCol_FrameBg] = frameBgColor;
 	style.Colors[ImGuiCol_FrameBgHovered] = mainColorHovered;
 	style.Colors[ImGuiCol_FrameBgActive] = mainColorActive;
 	style.Colors[ImGuiCol_TitleBg] = Settings::UI::mainColor.Color();
-	style.Colors[ImGuiCol_TitleBgCollapsed] = ImVec4(1.00f, 0.98f, 0.95f, 0.75f);
+	style.Colors[ImGuiCol_TitleBgCollapsed] = ImVec4(0.00f, 0.00f, 0.00f, 0.54f);
 	style.Colors[ImGuiCol_TitleBgActive] = Settings::UI::mainColor.Color();
 	style.Colors[ImGuiCol_MenuBarBg] = menubarColor;
-	style.Colors[ImGuiCol_ScrollbarBg] = ImVec4(frameBgColor.x + .05f, frameBgColor.y + .05f, frameBgColor.z + .05f, frameBgColor.w);
+	style.Colors[ImGuiCol_ScrollbarBg] = ImVec4(0.22f, 0.29f, 0.30f, 0.71f);
 	style.Colors[ImGuiCol_ScrollbarGrab] = Settings::UI::accentColor.Color();
 	style.Colors[ImGuiCol_ScrollbarGrabHovered] = accentColorHovered;
 	style.Colors[ImGuiCol_ScrollbarGrabActive] = accentColorActive;
@@ -294,5 +294,5 @@ void UI::SetupColors()
 	style.Colors[ImGuiCol_PlotHistogram] = Settings::UI::mainColor.Color();
 	style.Colors[ImGuiCol_PlotHistogramHovered] =  mainColorHovered;
 	style.Colors[ImGuiCol_TextSelectedBg] = mainColorHovered;
-	style.Colors[ImGuiCol_ModalWindowDarkening] = ImVec4(0.0f, 0.0f, 0.0f, 0.75f);
+	style.Colors[ImGuiCol_ModalWindowDarkening] = ImVec4(0.04f, 0.10f, 0.09f, 0.51f);
 }
