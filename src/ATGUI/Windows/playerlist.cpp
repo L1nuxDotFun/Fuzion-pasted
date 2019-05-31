@@ -24,10 +24,17 @@ void PlayerList::RenderWindow()
 
 	if (ImGui::Begin(XORSTR("About"), &PlayerList::showWindow, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_ShowBorders))
 	{
-		ImGui::Text("changelog release v2.0 WIP b7");
+		ImGui::Text("changelog release v2.1 WIP b8");
 		ImGui::Text("- removed mouse movements");
 		ImGui::Text("- removed player list");
 		ImGui::Text("- added rounded corners and fixed other gui issues");
+		ImGui::Text("- fixed the menu issues.");
+		ImGui::Text("- relocated fakelag to the hvh tab");
+		ImGui::Text("- relocated fakelag slider ammount to the hvh tab");
+		ImGui::Text("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+		ImGui::Text("SPECIAL THANKS!");
+		ImGui::Text("Koutsie, Koutsie#5777 -Staying up till 5am helping me find a nice menu & color scheme.");
+		ImGui::Text("Localplayer, Localplayer#0218 -The OG who actually made spacehook and the guy im pasting into his src, sorry xo");	
 		ImGui::End();
 	}
 }
