@@ -297,8 +297,8 @@ void Misc::RenderTab()
 			ImGui::Separator();
 			ImGui::Columns(2, NULL, true);
 			{
-				ImGui::Checkbox(XORSTR("Fake Lag"), &Settings::FakeLag::enabled);
-				ImGui::Checkbox(XORSTR("Adaptive Fake Lag"), &Settings::FakeLag::adaptive);
+				//ImGui::Checkbox(XORSTR("Fake Lag"), &Settings::FakeLag::enabled);
+				//ImGui::Checkbox(XORSTR("Adaptive Fake Lag"), &Settings::FakeLag::adaptive);
 				ImGui::Checkbox(XORSTR("Auto Accept"), &Settings::AutoAccept::enabled);
 				ImGui::Checkbox(XORSTR("Autoblock"), &Settings::Autoblock::enabled);
 				ImGui::Checkbox(XORSTR("Jump Throw"), &Settings::JumpThrow::enabled);
@@ -309,7 +309,7 @@ void Misc::RenderTab()
 			ImGui::NextColumn();
 			{
 				ImGui::PushItemWidth(-1);
-				ImGui::SliderInt(XORSTR("##FAKELAGAMOUNT"), &Settings::FakeLag::value, 0, 16, XORSTR("Amount: %0.f"));
+			//	ImGui::SliderInt(XORSTR("##FAKELAGAMOUNT"), &Settings::FakeLag::value, 0, 16, XORSTR("Amount: %0.f"));
 				ImGui::PopItemWidth();
 				ImGui::Checkbox(XORSTR("Show Ranks"), &Settings::ShowRanks::enabled);
 				ImGui::Checkbox(XORSTR("Screenshot Cleaner"), &Settings::ScreenshotCleaner::enabled);
