@@ -125,6 +125,11 @@ void HvH::RenderTab()
 			ImGui::Separator();
 			ImGui::Text(XORSTR("Movement"));
 			ImGui::Checkbox(XORSTR("Auto Crouch"), &Settings::Aimbot::AutoCrouch::enabled);
+			ImGui::Checkbox(XORSTR("Fake Lag"), &Settings::FakeLag::enabled);
+			ImGui::Checkbox(XORSTR("Adaptive Fake Lag"), &Settings::FakeLag::adaptive);
+			ImGui::Separator();
+			ImGui::SliderInt(XORSTR("##FAKELAGAMOUNT"), &Settings::FakeLag::value, 0, 16, XORSTR("Amount: %0.f"));
+
 			ImGui::EndChild();
 		}
 	}
