@@ -10,7 +10,6 @@
 
 - Desync
 - Forced resolver
-- Pasted GUI (Son:tm:)
 - Fixed Crashing with danger zone update
 - Remasterd Aimtux GUI ( made it more modern )
 
@@ -36,10 +35,6 @@ Arch: <br>
 Gentoo: <br>
 ```sudo emerge cmake dev-vcs/git gdb libsdl2 mesa``` <br> 
    **If you get this error** `fatal error: xdo.h: No such file or directory` please install ```sudo emerge x11/misc/xdo ```
-
-Fedora: <br>
-```sudo dnf install cmake gcc-c++ gdb git libstdc++-static mesa-libGL-devel SDL2-devel zlib-devel``` <br> 
-  **If you get this error** `fatal error: xdo.h: No such file or directory` please install ```sudo dnf install libxdo-devel ```
 
 openSUSE: <br> 
 ```sudo zypper install cmake gcc-c++ gdb git Mesa-libGL-devel SDL2-devel zlib-devel``` <br> 
