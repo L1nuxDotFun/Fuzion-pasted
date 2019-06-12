@@ -100,7 +100,7 @@ void UI::SwapWindow()
 	if (engine->IsInGame())
 		return;
 
-    Draw::ImText( ImVec2( 4.f, 4.f ), ImColor( 255, 255, 255, 255 ), XORSTR( "SpaceHook II - W.I.P " ), NULL, 0.0f, NULL,
+      Draw::ImText( ImVec2( 7.f, 4.f ), ImColor( 225, 235, 215, 240 ), XORSTR( "S P A C E H O O K   T W O " ), NULL, 4.0f, NULL,
                   ImFontFlags_Shadow );
 }
 
