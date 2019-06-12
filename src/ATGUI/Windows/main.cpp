@@ -24,7 +24,7 @@ void Main::RenderWindow()
 
 	static int page = 0;
 
-	if (ImGui::Begin(XORSTR("SpaceHook"), &Main::showWindow, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_ShowBorders))
+	if (ImGui::Begin(XORSTR("S P A C E  P A S T E"), &Main::showWindow, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_ShowBorders))
 	{
 		Settings::UI::Windows::Main::open = true;
 		ImVec2 temp = ImGui::GetWindowSize();
@@ -35,8 +35,8 @@ void Main::RenderWindow()
 		Settings::UI::Windows::Main::posY = (int)temp.y;
 		const char* tabs[] = {
 				"Aimbot",
-				//"Triggerbot", // commented out because i dont need it.
-				"Visuals",
+				"Triggerbot", // commented out because i dont need it.
+				"Visuals", 
 				"HvH",
 				"Misc",
 		};
@@ -67,17 +67,17 @@ void Main::RenderWindow()
 		{
 			case 0:
 				Aimbot::RenderTab();
-				break;
-				//case 1:
-				//Triggerbot::RenderTab();
-				break;
+			break;
 			case 1:
-				Visuals::RenderTab();
-				break;
+				Triggerbot::RenderTab();
+			break;
 			case 2:
+				Visuals::RenderTab();
+			break;
+			case 3:
 				HvH::RenderTab();
 				break;
-			case 3:
+			case 4:
 				Misc::RenderTab();
 				break;
 		}
