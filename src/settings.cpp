@@ -302,6 +302,7 @@ void Settings::LoadDefaultsOrSave(std::string path)
 	settings[XORSTR("ESP")][XORSTR("Chams")][XORSTR("Arms")][XORSTR("enabled")] = Settings::ESP::Chams::Arms::enabled;
 	settings[XORSTR("ESP")][XORSTR("Chams")][XORSTR("Arms")][XORSTR("type")] = (int) Settings::ESP::Chams::Arms::type;
 	settings[XORSTR("ESP")][XORSTR("Chams")][XORSTR("Weapon")][XORSTR("enabled")] = Settings::ESP::Chams::Weapon::enabled;
+	settings[XORSTR("ESP")][XORSTR("Chams")][XORSTR("Weapon")][XORSTR("type")] = (int) Settings::ESP::Chams::Weapon::type;
 	LoadColor(settings[XORSTR("ESP")][XORSTR("Chams")][XORSTR("Weapon")][XORSTR("color")], Settings::ESP::Chams::Weapon::color);
 	LoadColor(settings[XORSTR("ESP")][XORSTR("Chams")][XORSTR("Arms")][XORSTR("color")], Settings::ESP::Chams::Arms::color);
 	LoadColor(settings[XORSTR("ESP")][XORSTR("Chams")][XORSTR("players_ally_color")], Settings::ESP::Chams::allyColor);
@@ -362,10 +363,12 @@ void Settings::LoadDefaultsOrSave(std::string path)
 	settings[XORSTR("BHop")][XORSTR("Hops")][XORSTR("Max")] = Settings::BHop::Hops::Max;
 	settings[XORSTR("BHop")][XORSTR("Hops")][XORSTR("enabledMin")] = Settings::BHop::Hops::enabledMin;
 	settings[XORSTR("BHop")][XORSTR("Hops")][XORSTR("Min")] = Settings::BHop::Hops::Min;
+	
 
 	settings[XORSTR("AutoStrafe")][XORSTR("enabled")] = Settings::AutoStrafe::enabled;
 	settings[XORSTR("AutoStrafe")][XORSTR("type")] = (int) Settings::AutoStrafe::type;
 	settings[XORSTR("AutoStrafe")][XORSTR("silent")] = Settings::AutoStrafe::silent;
+	
 
 	settings[XORSTR("Noflash")][XORSTR("enabled")] = Settings::Noflash::enabled;
 	settings[XORSTR("Noflash")][XORSTR("value")] = Settings::Noflash::value;
@@ -740,6 +743,7 @@ void Settings::LoadConfig(std::string path)
 	GetVal(settings[XORSTR("ESP")][XORSTR("Chams")][XORSTR("Arms")][XORSTR("type")], (int*)& Settings::ESP::Chams::Arms::type);
 	GetVal(settings[XORSTR("ESP")][XORSTR("Chams")][XORSTR("Arms")][XORSTR("color")], &Settings::ESP::Chams::Arms::color);
 	GetVal(settings[XORSTR("ESP")][XORSTR("Chams")][XORSTR("Weapon")][XORSTR("enabled")], &Settings::ESP::Chams::Weapon::enabled);
+	GetVal(settings[XORSTR("ESP")][XORSTR("Chams")][XORSTR("Weapon")][XORSTR("type")], (int*)& Settings::ESP::Chams::Weapon::type);
 	GetVal(settings[XORSTR("ESP")][XORSTR("Chams")][XORSTR("Weapon")][XORSTR("color")], &Settings::ESP::Chams::Weapon::color);
 	GetVal(settings[XORSTR("ESP")][XORSTR("Chams")][XORSTR("players_ally_color")], &Settings::ESP::Chams::allyColor);
 	GetVal(settings[XORSTR("ESP")][XORSTR("Chams")][XORSTR("players_ally_visible_color")], &Settings::ESP::Chams::allyVisibleColor);
@@ -800,6 +804,8 @@ void Settings::LoadConfig(std::string path)
 	GetVal(settings[XORSTR("BHop")][XORSTR("Hops")][XORSTR("Max")], &Settings::BHop::Hops::Max);
 	GetVal(settings[XORSTR("BHop")][XORSTR("Hops")][XORSTR("enabledMin")], &Settings::BHop::Hops::enabledMin);
 	GetVal(settings[XORSTR("BHop")][XORSTR("Hops")][XORSTR("Min")], &Settings::BHop::Hops::Min);
+	
+
 
 	GetVal(settings[XORSTR("AutoStrafe")][XORSTR("enabled")], &Settings::AutoStrafe::enabled);
 	GetVal(settings[XORSTR("AutoStrafe")][XORSTR("type")], (int*)& Settings::AutoStrafe::type);
