@@ -4,6 +4,7 @@ bool Settings::ESP::Chams::enabled = false;
 bool Settings::ESP::Chams::Arms::enabled = false;
 bool Settings::ESP::Chams::Weapon::enabled = false;
 ArmsType Settings::ESP::Chams::Arms::type = ArmsType::DEFAULT;
+WeaponType Settings::ESP::Chams::Weapon::type = WeaponType::DEFAULT;
 HealthColorVar Settings::ESP::Chams::allyColor = ImColor(0, 0, 255, 255);
 HealthColorVar Settings::ESP::Chams::allyVisibleColor = ImColor(0, 255, 0, 255);
 HealthColorVar Settings::ESP::Chams::enemyColor = ImColor(255, 0, 0, 255);
@@ -124,10 +125,12 @@ static void DrawWeapon(const ModelRenderInfo_t& pInfo)
 
 	if (!Settings::ESP::Chams::Weapon::enabled)
 		mat = material->FindMaterial(modelName.c_str(), TEXTURE_GROUP_MODEL);
+		mat->AlphaModulate(Settings::ESP::Chams::Weapon::color.Color().Value.w);
 
-	mat->AlphaModulate(1.0f);
+	
 	mat->ColorModulate(Settings::ESP::Chams::Weapon::color.Color());
-
+	mat->SetMaterialVarFlag(MATERIAL_VAR_WIREFRAME, Settings::ESP::Chams::Weapon::type == WeaponType::WIREFRAME);
+	mat->SetMaterialVarFlag(MATERIAL_VAR_NO_DRAW, Settings::ESP::Chams::Weapon::type == WeaponType::NONE);
 	modelRender->ForcedMaterialOverride(mat);
 }
 
@@ -141,6 +144,7 @@ static void DrawArms(const ModelRenderInfo_t& pInfo)
 
 	if (!Settings::ESP::Chams::Arms::enabled)
 		mat = material->FindMaterial(modelName.c_str(), TEXTURE_GROUP_MODEL);
+		mat->AlphaModulate(Settings::ESP::Chams::Arms::color.Color().Value.w);
 
 	switch (Settings::ESP::Chams::Arms::type)
 	{
