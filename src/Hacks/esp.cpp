@@ -1000,7 +1000,7 @@ static void DrawPlantedBomb(C_PlantedC4* bomb)
 
 		float damage = std::max((int) ceilf(GetArmourHealth(flDamage, localplayer->GetArmor())), 0);
 
-		displayText << XORSTR("Bomb: ") << std::fixed << std::showpoint << std::setprecision(1) << bombTimer << XORSTR(", damage: ") << (int) damage;
+		displayText << XORSTR("le bomb: ") << std::fixed << std::showpoint << std::setprecision(1) << bombTimer << XORSTR(", damage: ") << (int) damage;
 	}
 
 	DrawEntity(bomb, displayText.str().c_str(), Color::FromImColor(color));
