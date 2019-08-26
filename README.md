@@ -1,28 +1,17 @@
 <p align="center">
   Biggest meme on the world. And it hits. Somehow. <br>
   <img src="https://flat.badgen.net/badge/VAC/Undetected./green?icon=terminal"><br>
-  <img src="https://forthebadge.com/images/badges/made-with-c.svg">
-  <img src="https://forthebadge.com/images/badges/made-with-c-plus-plus.svg">
 <img src="https://i.ibb.co/YjHMLYd/niggatoni.png"><br>v2
 </p> <br>
 
-### Feature list <br>
+### Feature list: <br>
 
 - Desync
 - Forced resolver
-- Fixed Crashing with danger zone update
+- Fixed Danger Zone crashes
 - Remasterd Aimtux GUI ( made it more modern )
 
-## Coming Soon!
-- Fixed for danger zone so you don't get low fps
--Maybe Better AA
-- Synced Clantag
--Remove useless shit 
-
-## How to install <br>
-
-
-
+## How to install: <br>
 
 Debian based: <br>
 ```sudo apt-get install cmake g++ gdb git libsdl2-dev zlib1g-dev```<br> 
@@ -40,11 +29,14 @@ openSUSE: <br>
 ```sudo zypper install cmake gcc-c++ gdb git Mesa-libGL-devel SDL2-devel zlib-devel``` <br> 
   **If you get this error** `fatal error: xdo.h: No such file or directory` please install ```sudo zypper install xdotool ```
 
+# Building:
+```./build```
+
 # Screenshots
-<a href="https://ibb.co/Y7hMcPr"><img src="https://i.ibb.co/MD74cZX/image.png" alt="image" border="0"></a>
+<a href="https://ibb.co/Y7hMcPr"><img src="https://i.ibb.co/MD74cZX/image.png" alt="image" border="2"></a>
 
 
 
 # Credits:
-- Aimtux/Fuzion for being a base
-- xDylan#0376 - **For actually fixing this dead thing**
+- xDylan#0376 - Backporting a fuckton of shit from LWSS/Fuzion
+- LWSS/Fuzion for being a base
