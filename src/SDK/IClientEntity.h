@@ -728,22 +728,22 @@ public:
 
 	CCSWeaponInfo* GetCSWpnData() { // "script file not found"
 		typedef CCSWeaponInfo* (* oGetCSWpnData)( void* );
-		return getvfunc<oGetCSWpnData>( this, 523 )( this );
+		return getvfunc<oGetCSWpnData>( this, 456 )( this );
 	}
 
 	float GetSpread() {
 		typedef float (* oGetSpread)( void* );
-		return getvfunc<oGetSpread>( this, 515 )( this );
+		return getvfunc<oGetSpread>( this, 448 )( this );
 	}
 
 	float GetInaccuracy() {
 		typedef float (* oGetInaccuracy)( void* );
-		return getvfunc<oGetInaccuracy>( this, 545 )( this );
+		return getvfunc<oGetInaccuracy>( this, 478 )( this );
 	}
 
 	void UpdateAccuracyPenalty() {
 		typedef void (* oUpdateAccuracyPenalty)( void* );
-		return getvfunc<oUpdateAccuracyPenalty>( this, 546 )( this );
+		return getvfunc<oUpdateAccuracyPenalty>( this, 479 )( this );
 	}
 };
 
