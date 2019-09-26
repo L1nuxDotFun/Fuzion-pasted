@@ -686,8 +686,11 @@ static void AutoShoot(C_BasePlayer* player, Vector& spot, C_BaseCombatWeapon* ac
 
 	C_BasePlayer* localplayer = (C_BasePlayer*) entityList->GetClientEntity(engine->GetLocalPlayer());
 
-	if (Settings::Aimbot::AutoShoot::autoscope && activeWeapon->GetCSWpnData()->GetZoomLevels() > 0 && !localplayer->IsScoped())
-		cmd->buttons |= IN_ATTACK2;
+	if (Settings::Aimbot::AutoShoot::autoscope && Util::Items::IsScopeable(*activeWeapon->GetItemDefinitionIndex()) && !localplayer->IsScoped())
+    {
+	    cmd->buttons |= IN_ATTACK2;
+	    return; 
+    }
 
 	if( Settings::Aimbot::AutoShoot::velocityCheck && localplayer->GetVelocity().Length() > (activeWeapon->GetCSWpnData()->GetMaxPlayerSpeed() / 3) )
 		return;
