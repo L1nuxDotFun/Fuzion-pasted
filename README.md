@@ -6,7 +6,7 @@
 
 ## How to install: <br>
 
-oh yeah rolling release distro support was lost cus this shit wont build for some idiotic reason lmao
+oh yeah rolling release distro support was lost cus this shit wont build for some idiotic reason lmao <br>
 Koutsie its because i broke the aimbot but idk how to fix, ask shiruba.
 
 Debian based: <br>
