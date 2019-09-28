@@ -4,14 +4,11 @@
 <img src="https://i.ibb.co/YjHMLYd/niggatoni.png"><br>v2
 </p> <br>
 
-# WARNING:
-```DA CHEAT ONLY WORKS ON UBUNTU / DEBIAN I THINK CUZ OF SOME GAY ASS CODE AND IDK HOW TO FIX, CAUSE IM A SKID. - DYL```<br> 
-
 ## How to install: <br>
 
 Debian based: <br>
 ```sudo apt-get install cmake g++ gdb git libsdl2-dev zlib1g-dev```<br> 
-  **If you get this error** `fatal error: xdo.h: No such file or directory` please install ```sudo apt install libxdo-dev```
+  **If you get this error:** "`fatal error: xdo.h: No such file or directory`", please install: ```sudo apt install libxdo-dev```
 
 
 # Building:
