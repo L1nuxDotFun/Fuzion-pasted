@@ -6,6 +6,8 @@
 
 ## How to install: <br>
 
+oh yeah rolling release distro support was lost cus this shit wont build for some idiotic reason lmao
+
 Debian based: <br>
 ```sudo apt-get install cmake g++ gdb git libsdl2-dev zlib1g-dev```<br> 
   **If you get this error:** "`fatal error: xdo.h: No such file or directory`", please install: ```sudo apt install libxdo-dev```
