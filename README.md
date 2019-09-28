@@ -7,6 +7,7 @@
 ## How to install: <br>
 
 oh yeah rolling release distro support was lost cus this shit wont build for some idiotic reason lmao
+Koutsie its because i broke the aimbot but idk how to fix, ask shiruba.
 
 Debian based: <br>
 ```sudo apt-get install cmake g++ gdb git libsdl2-dev zlib1g-dev```<br> 
@@ -24,5 +25,5 @@ or for debugging
 
 
 # Credits:
-- **xDylan#0376** - Backporting a fuckton of shit from LWSS/Fuzion
+- **dylann#0376** - Backporting a fuckton of shit from LWSS/Fuzion
 - **LWSS/Fuzion** for being a base
