@@ -1,3 +1,6 @@
+# hey, pst: netsu... fuck off <3
+
+
 <p align="center">
   Biggest meme on the world. And it hits (insert joke here). Somehow. <br>
   <img src="https://flat.badgen.net/badge/VAC/Undetected./green?icon=terminal"><br>
@@ -7,7 +10,7 @@
 ## How to install: <br>
 
 oh yeah rolling release distro support was lost cus this shit wont build for some idiotic reason lmao <br>
-Koutsie its because i broke the aimbot but idk how to fix, ask shiruba.
+Oh dyl, gotchu no problemo yeah shiruba pls fix aimbot?
 
 Debian based: <br>
 ```sudo apt-get install cmake g++ gdb git libsdl2-dev zlib1g-dev```<br> 
