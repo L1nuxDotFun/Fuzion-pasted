@@ -1,4 +1,4 @@
-# hey, pst: netsu... fuck off <3
+# hey, pst: shiruba... fuck off <3
 
 
 <p align="center">
