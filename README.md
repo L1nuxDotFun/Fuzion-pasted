@@ -1,6 +1,3 @@
-# hey, pst: shiruba... fuck off <3
-
-
 <p align="center">
   Biggest meme on the world. And it hits (insert joke here). Somehow. <br>
   <img src="https://flat.badgen.net/badge/VAC/Undetected./green?icon=terminal"><br>
