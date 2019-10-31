@@ -25,5 +25,4 @@ or for debugging
 
 
 # Credits:
-- **dylann#0376** - Backporting a fuckton of shit from LWSS/Fuzion
 - **LWSS/Fuzion** for being a base
