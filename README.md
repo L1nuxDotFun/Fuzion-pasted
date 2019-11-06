@@ -7,7 +7,6 @@
 ## How to install: <br>
 
 oh yeah rolling release distro support was lost cus this shit wont build for some idiotic reason lmao <br>
-Oh Dyl, gotchu no problemo, yeah Shiruba pls fix aimbot?
 
 Debian based: <br>
 ```sudo apt-get install cmake g++ gdb git libsdl2-dev zlib1g-dev```<br> 
