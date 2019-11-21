@@ -1,5 +1,5 @@
 <p align="center">
-  Biggest meme in the world. And it hits (insert joke here). Somehow. <br>
+  Biggest meme in the world. And it hits pelvis. Somehow. <br>
   <img src="https://flat.badgen.net/badge/VAC/Undetected./green?icon=terminal"><br>
 <img src="https://i.ibb.co/YjHMLYd/niggatoni.png"><br>v2
 </p> <br>
