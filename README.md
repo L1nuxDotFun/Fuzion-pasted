@@ -1,4 +1,5 @@
 <p align="center">
+  <h1>5 finnish shekels for whoever fixes this. contact me for payout. Sun May 16 10:48:00 PM EEST 2021</h1>
   Biggest meme in the world. And it hits pelvis. Somehow. <br>
   <img src="https://flat.badgen.net/badge/VAC/Undetected./green?icon=terminal"><br>
 <img src="https://i.ibb.co/YjHMLYd/niggatoni.png"><br>v2
